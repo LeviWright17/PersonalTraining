@@ -5,6 +5,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { ServicesComponent } from './services/services.component';
 import { ContactComponent } from './contact/contact.component';
 import { RouterModule } from '@angular/router'; 
+import { HttpClientModule } from '@angular/common/http'; 
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     BrowserModule, 
+    HttpClientModule,
     RouterModule.forRoot([
       {path: 'about-us', component: AboutUsComponent },
       {path: 'contact', component: ContactComponent },

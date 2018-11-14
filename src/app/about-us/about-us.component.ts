@@ -15,10 +15,12 @@ export class AboutUsComponent implements OnInit, IAboutUs {
   }
 
   ngOnInit() {
-    //Make an API call to get data.
+    console.log("I AM BEING CALLED"); 
+    var result = this.aboutUsService.getAboutUsData(); 
+    console.log(result, 'this is the result muthafucka'); 
   }
 
   whatever(): void {
-    throw new Error("Method not implemented.");
+    //whatever yo.
   }
 }
