@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, range } from 'rxjs'; 
-import { map, filter } from 'rxjs/operators'; 
-import { HttpClient } from '@angular/common/http';
+import { map, filter, catchError, tap } from 'rxjs/operators'; 
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +11,14 @@ export class AboutUsService {
 
   constructor(private http: HttpClient) { }
 
-  getAboutUsData(){
-    const source$: Observable<number> = range(0, 10); 
-    
-    //This is an example of an observable. 
-    // source$.pipe(
-    //   map(x => x * 3),
-    //   filter(x => x % 2 === 0)
-    // ).subscribe(x => console.log(x)); 
+  getAboutUsData(): Observable<any>{
+    return this.http.get("https://reqres.in/api/users/2").pipe(
+      tap(data => console.log('All:' + JSON.stringify(data)))
+      // catchError(this.handleError)
+    ); 
+  }
 
-    var response = this.http.get("https://reqres.in/api/products/3"); 
-    return response; 
+  private handleError(error: HttpErrorResponse){
+    //can send to a logging service, database, console etc. 
   }
 }

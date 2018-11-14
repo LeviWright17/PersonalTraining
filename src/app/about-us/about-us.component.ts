@@ -15,8 +15,7 @@ export class AboutUsComponent implements OnInit, IAboutUs {
   }
 
   ngOnInit() {
-    console.log("I AM BEING CALLED"); 
-    var result = this.aboutUsService.getAboutUsData(); 
+    var result = this.aboutUsService.getAboutUsData().subscribe(); 
     console.log(result, 'this is the result muthafucka'); 
   }
 
