@@ -11,7 +11,7 @@ export class AboutUsService {
 
   constructor(private http: HttpClient) { }
 
-  getProfile(): Observable<any>{
+  getAboutUsData(): Observable<any>{
     return this.http.get("https://reqres.in/api/users/2").pipe(
       tap(data => console.log('All:' + JSON.stringify(data)))
       // catchError(this.handleError)
@@ -22,3 +22,9 @@ export class AboutUsService {
     //can send to a logging service, database, console etc. 
   }
 }
+
+
+//Methods that you'll want: 
+//--> Maybe a method to get a photo.
+//--> Resume will be done in HTML
+//--> Get customer reviews and render them from the db.
