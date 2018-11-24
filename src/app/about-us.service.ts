@@ -11,7 +11,7 @@ export class AboutUsService {
 
   constructor(private http: HttpClient) { }
 
-  getProfile(): Observable<any>{
+getAboutUsData(): Observable<any>{
     return this.http.get("https://reqres.in/api/users/2").pipe(
       tap(data => console.log('All:' + JSON.stringify(data)))
       // catchError(this.handleError)
