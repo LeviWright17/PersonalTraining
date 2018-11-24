@@ -1,3 +1,3 @@
 export interface IAboutUs {
-    whatever(): void; 
+    // whatever(): void; 
 }

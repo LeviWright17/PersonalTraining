@@ -14,4 +14,15 @@ export class ContactComponent implements OnInit {
   ngOnInit() {
   }
 
+  verifyEmailContentValid(){
+
+  }
+  
+  sendEmail(){
+
+  }
+  
+  //Methods you'll want: 
+  //--> A post method to send an email.
+
 }
