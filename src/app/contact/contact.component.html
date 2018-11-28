@@ -3,3 +3,14 @@ What Contact needs:
 <ul>
   <li>An email form for questions</li>
 </ul>
+
+<div class="container">
+  <h3>Email Form</h3>
+  <form #emailForm="ngForm">
+    <div class="form-group">
+      <label for="emailContent">Your Message</label>
+      <input class="form-control" type="text" id="emailContent" name="emailContent" ngModel>
+    </div>
+    <button class="btn btn-primary" type="submit" id="sendEmailButton" name="send">Send</button>
+  </form>
+</div>

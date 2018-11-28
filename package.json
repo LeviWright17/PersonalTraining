@@ -44,5 +44,17 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~2.9.2"
-  }
+  },
+  "description": "Soccer Personal Training Project",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeviWright17/PersonalTraining.git"
+  },
+  "author": "Levi Wright",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeviWright17/PersonalTraining/issues"
+  },
+  "homepage": "https://github.com/LeviWright17/PersonalTraining#readme"
 }

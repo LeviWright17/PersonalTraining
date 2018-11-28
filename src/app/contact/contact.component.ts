@@ -9,9 +9,12 @@ import { ContactService } from '../contact.service';
 })
 export class ContactComponent implements OnInit {
 
-  constructor() { }
+  constructor(private contactService: ContactService) { }
 
   ngOnInit() {
+    // // var result = this.ContactService.getAboutUsData().subscribe(); 
+    // var result = this.contactService.getContactData().subscribe(); 
+    // console.log(result, 'this is the result my dude'); 
   }
 
   verifyEmailContentValid(){
