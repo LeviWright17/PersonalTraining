@@ -28,15 +28,15 @@ export class ContactComponent implements OnInit {
 
   private potentialCustomer: potentialCustomer = new potentialCustomer(); 
 
-
   constructor(private contactService: ContactService) {
-    
+    this.potentialCustomer.primaryInterest = ''; 
    }
 
   ngOnInit() {
     // // var result = this.ContactService.getAboutUsData().subscribe(); 
     // var result = this.contactService.getContactData().subscribe(); 
     // console.log(result, 'this is the result my dude'); 
+    
   }
 
   verifyEmailContentValid(){

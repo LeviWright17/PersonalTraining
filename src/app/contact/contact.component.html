@@ -3,15 +3,15 @@
   <form #emailForm="ngForm" novalidate>
     <div class="form-group">
       <label >Name</label>
-      <input class="form-control" type="text" id="name" name="nameContent" [(ngModel)]="potentialCustomer.name">
+      <input class="form-control" placeholder="First, Last" type="text" id="name" name="nameContent" [(ngModel)]="potentialCustomer.name">
     </div>
     <div class="form-group">
       <label>Email Address</label>
-      <input class="form-control" type="text" id="emailAddressContent" name="emailAddressContent" [(ngModel)]="potentialCustomer.emailAddress">
+      <input class="form-control" placeholder="example@website.com" type="text" id="emailAddressContent" name="emailAddressContent" [(ngModel)]="potentialCustomer.emailAddress">
       </div>
     <div class="form-group">
         <label>Phone Number</label>
-        <input class="form-control" type="text" id="phoneNumberContent" name="phoneNumberContent" [(ngModel)]="potentialCustomer.phoneNumber">
+        <input class="form-control" placeholder="10 digits, including aread code" type="text" id="phoneNumberContent" name="phoneNumberContent" [(ngModel)]="potentialCustomer.phoneNumber">
     </div>
     <label>My communication preference:</label>
     <div class="radio">
@@ -37,6 +37,7 @@
     <div class="form-group">
       <label>I'm Most Interested in Working On...</label>
       <select class="form-control" name="primaryInterest" [(ngModel)]="potentialCustomer.primaryInterest">
+        <option value="" disabled="true">-Select-</option>
         <option *ngFor="let interest of interests">
           {{ interest }}
         </option>
