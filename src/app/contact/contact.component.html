@@ -17,26 +17,26 @@
     <div class="radio">
       <span class="communication-preference-radio-spacing">
       <label>
-        <input type="radio" name="communicationPreference" value="email" checked>
+        <input type="radio" name="communicationPreference" value="email" [(ngModel)]="potentialCustomer.communicationPreference" checked>
         Email
       </label>
       </span>
       <span class="communication-preference-radio-spacing">
       <label>
-        <input type="radio" name="communicationPreference" value="text">
+        <input type="radio" name="communicationPreference" value="text" [(ngModel)]="potentialCustomer.communicationPreference">
         Text
       </label>
     </span>
     <span class="communication-preference-radio-spacing">
       <label>
-        <input type="radio" name="communicationPreference" value="phoneCall">
+        <input type="radio" name="communicationPreference" value="phoneCall" [(ngModel)]="potentialCustomer.communicationPreference">
         Phone Call
       </label>
       </span>
     </div>
     <div class="form-group">
       <label>I'm Most Interested in Working On...</label>
-      <select class="form-control">
+      <select class="form-control" name="primaryInterest" [(ngModel)]="potentialCustomer.primaryInterest">
         <option *ngFor="let interest of interests">
           {{ interest }}
         </option>
@@ -44,7 +44,7 @@
     </div>
     <div class="form-group">
         <label >Additional Comments</label>
-        <textarea class="form-control" placeholder="Tell us about yourself! For Example : Experience level, Current teams you play for, and what you're hoping to get out of working with us." rows="8" id="emailContent" name="emailContent" ngModel></textarea>
+        <textarea class="form-control" placeholder="Tell us about yourself! For Example : Experience level, Current teams you play for, and what you're hoping to get out of working with us." rows="8" id="emailContent" name="emailContent"  [(ngModel)]="potentialCustomer.additionalComments"></textarea>
       </div>
     <button class="btn btn-primary" type="submit" id="sendEmailButton" name="send" (click)="sendEmail()">Send</button>
   </form>
