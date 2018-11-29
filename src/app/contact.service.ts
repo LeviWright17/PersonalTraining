@@ -12,9 +12,13 @@ export class ContactService {
 
   getContactData(): Observable<any>{
     //https://reqres.in/api/users/2"
-      return this.http.get("/contact").pipe(
-        tap(data => console.log('All:' + JSON.stringify(data)))
-      ); 
+      // return this.http.get("/contact").pipe(
+      //   tap(data => console.log('All:' + JSON.stringify(data)))
+      // ); 
+      return new Observable(); 
     }
-  
+
+  postContactData(postBody){
+    // this.http.post("/contact/sendMessage", postBody, {}); 
+  }  
 }

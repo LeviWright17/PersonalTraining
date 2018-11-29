@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from '../contact.service';
+import { potentialCustomer } from '../models/potentialCustomer.model';
 
 @Component({
   selector: 'app-contact',
@@ -8,26 +9,29 @@ import { ContactService } from '../contact.service';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
+  private interests = [
+    'General Soccer Fitness', 
+    'Idividual Attacking', 
+    'Individual Defending', 
+    'Passing Techniques',
+    'Ball Striking / Finishing',
+    'Aggression',
+    'Crossing / Assisting',
+    'Weak Foot Improvement',
+    'Juggling / First Touch',
+    'Heading / Air Challenges',
+    'Finesse / Ball Handling', 
+    'Tryout Preparation',
+    'Speed of Play',
+    'Other' 
+  ];
 
-  constructor(private contactService: ContactService) { }
+  private potentialCustomer: potentialCustomer = new potentialCustomer(); 
 
-  public interests = [
-  'General Soccer Fitness', 
-  'Idividual Attacking', 
-  'Individual Defending', 
-  'Passing Techniques',
-  'Ball Striking / Finishing',
-  'Aggression',
-  'Crossing / Assisting',
-  'Weak Foot Improvement',
-  'Juggling / First Touch',
-  'Heading / Air Challenges',
-  'Finesse / Ball Handling', 
-  'Tryout Preparation',
-  'Speed of Play',
-  'Other' 
-];
 
+  constructor(private contactService: ContactService) {
+    
+   }
 
   ngOnInit() {
     // // var result = this.ContactService.getAboutUsData().subscribe(); 
@@ -40,7 +44,8 @@ export class ContactComponent implements OnInit {
   }
   
   sendEmail(){
-
+    //send the potentialCustomer object to the server to post the data for communication. 
+    console.log(this.potentialCustomer, 'THIS IS THE POTENTIAL CUSTOMER DATA'); 
   }
   
   //Methods you'll want: 
