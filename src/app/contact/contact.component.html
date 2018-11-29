@@ -6,11 +6,44 @@ What Contact needs:
 
 <div class="container">
   <h3>Email Form</h3>
-  <form #emailForm="ngForm">
+  <form #emailForm="ngForm" novalidate>
     <div class="form-group">
-      <label for="emailContent">Your Message</label>
-      <input class="form-control" type="text" id="emailContent" name="emailContent" ngModel>
+      <label >Name</label>
+      <input class="form-control" type="text" id="name" name="nameContent" ngModel>
     </div>
+    <div class="form-group">
+      <label>Email Address</label>
+      <input class="form-control" type="text" id="emailAddressContent" name="emailAddressContent" ngModel>
+      </div>
+    <div class="form-group">
+        <label>Phone Number</label>
+        <input class="form-control" type="text" id="emailAddressContent" name="emailAddressContent" ngModel>
+    </div>
+    <label>My communication preference:</label>
+    <div class="radio">
+      <span class="communication-preference-radio-spacing">
+      <label>
+        <input type="radio" name="preferEmail" value="email" checked>
+        Email
+      </label>
+      </span>
+      <span class="communication-preference-radio-spacing">
+      <label>
+        <input type="radio" name="preferText" value="text">
+        Text
+      </label>
+    </span>
+    <span class="communication-preference-radio-spacing">
+      <label>
+        <input type="radio" name="preferPhoneCall" value="phoneCall">
+        Phone Call
+      </label>
+      </span>
+    </div>
+    <div class="form-group">
+        <label >Your Message</label>
+        <input class="form-control" type="text" id="emailContent" name="emailContent" ngModel>
+      </div>
     <button class="btn btn-primary" type="submit" id="sendEmailButton" name="send">Send</button>
   </form>
 </div>
