@@ -1,9 +1,3 @@
-What Contact needs: 
-
-<ul>
-  <li>An email form for questions</li>
-</ul>
-
 <div class="container">
   <h3>Email Form</h3>
   <form #emailForm="ngForm" novalidate>
@@ -23,26 +17,26 @@ What Contact needs:
     <div class="radio">
       <span class="communication-preference-radio-spacing">
       <label>
-        <input type="radio" name="preferEmail" value="email" checked>
+        <input type="radio" name="communicationPreference" value="email" checked>
         Email
       </label>
       </span>
       <span class="communication-preference-radio-spacing">
       <label>
-        <input type="radio" name="preferText" value="text">
+        <input type="radio" name="communicationPreference" value="text">
         Text
       </label>
     </span>
     <span class="communication-preference-radio-spacing">
       <label>
-        <input type="radio" name="preferPhoneCall" value="phoneCall">
+        <input type="radio" name="communicationPreference" value="phoneCall">
         Phone Call
       </label>
       </span>
     </div>
     <div class="form-group">
         <label >Your Message</label>
-        <input class="form-control" type="text" id="emailContent" name="emailContent" ngModel>
+        <input class="form-control email-content" type="text" id="emailContent" name="emailContent" ngModel>
       </div>
     <button class="btn btn-primary" type="submit" id="sendEmailButton" name="send">Send</button>
   </form>

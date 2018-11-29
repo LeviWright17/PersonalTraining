@@ -12,16 +12,7 @@ export class ServicesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.loadCustomerReviews(); 
-  }
-
-  loadCustomerReviews(){
-    //Make an api call to get all reviews from the db.
-  }
-
-  postNewReview(){
-    //Make an api call to post a new review.
-    this.loadCustomerReviews(); 
+    // this.loadCustomerReviews(); 
   }
 
   //Methods you'll want: 
