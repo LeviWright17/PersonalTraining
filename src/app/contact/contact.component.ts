@@ -11,6 +11,24 @@ export class ContactComponent implements OnInit {
 
   constructor(private contactService: ContactService) { }
 
+  public interests = [
+  'General Soccer Fitness', 
+  'Idividual Attacking', 
+  'Individual Defending', 
+  'Passing Techniques',
+  'Ball Striking / Finishing',
+  'Aggression',
+  'Crossing / Assisting',
+  'Weak Foot Improvement',
+  'Juggling / First Touch',
+  'Heading / Air Challenges',
+  'Finesse / Ball Handling', 
+  'Tryout Preparation',
+  'Speed of Play',
+  'Other' 
+];
+
+
   ngOnInit() {
     // // var result = this.ContactService.getAboutUsData().subscribe(); 
     // var result = this.contactService.getContactData().subscribe(); 
