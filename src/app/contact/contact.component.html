@@ -14,42 +14,7 @@
         <input class="form-control" placeholder="10 digits, including aread code" type="text" id="phoneNumberContent" name="phoneNumberContent" [(ngModel)]="potentialCustomer.phoneNumber">
     </div>
     <label>My communication preference:</label>
-    <!-- <div class="btn-group-toggle communication-preference-radio-spacing" data-toggle="buttons">
-        <label class="btn btn-outline-secondary active">
-          <input type="checkbox" checked autocomplete="off"> Email
-        </label>
-        <label class="btn btn-outline-secondary communication-preference-radio-spacing">
-            <input type="checkbox" checked autocomplete="off"> Text
-          </label>
-          <label class="btn btn-outline-secondary communication-preference-radio-spacing">
-              <input type="checkbox" checked autocomplete="off"> Phone Call
-            </label>
-    </div> -->
-    <div>
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-outline-secondary active">
-          <input type="radio" name="options" id="option1" autocomplete="off" checked> Email
-        </label>
-        <label class="btn btn-outline-secondary">
-          <input type="radio" name="options" id="option2" autocomplete="off"> Text
-        </label>
-        <label class="btn btn-outline-secondary">
-          <input type="radio" name="options" id="option3" autocomplete="off"> Phone Call
-        </label>
-      </div>
-    </div>
-    <!-- <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-secondary active">
-          <input type="radio" name="options" id="option1" autocomplete="off" checked> 
-        </label>
-        <label class="btn btn-secondary">
-          <input type="radio" name="options" id="option2" autocomplete="off"> Radio
-        </label>
-        <label class="btn btn-secondary">
-          <input type="radio" name="options" id="option3" autocomplete="off"> Radio
-        </label>
-      </div> -->
-    <!-- <div class="radio">
+    <div class="radio">
       <span class="communication-preference-radio-spacing">
       <label>
         <input type="radio" name="communicationPreference" value="email" [(ngModel)]="potentialCustomer.communicationPreference" [checked]="true">
@@ -68,7 +33,7 @@
         Phone Call
       </label>
       </span>
-    </div> -->
+    </div>
     <div class="form-group">
       <label>I'm Most Interested in Working On...</label>
       <select class="form-control" name="primaryInterest" [(ngModel)]="potentialCustomer.primaryInterest">
