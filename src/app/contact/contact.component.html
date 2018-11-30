@@ -1,5 +1,8 @@
 <div class="container">
-  <h3>Email Form</h3>
+  <h3>We'd Love to Hear From You!</h3>
+  <h5>We do our best to respond to our potential customers as quickly as possible. But if we can't get to you right away, we will respond within 48 hours.
+    We look forward to helping you reach your goals!
+  </h5>
   <form #emailForm="ngForm" novalidate>
     <div class="form-group">
       <label >Name</label>
@@ -12,6 +15,18 @@
     <div class="form-group">
         <label>Phone Number</label>
         <input class="form-control" placeholder="10 digits, including aread code" type="text" id="phoneNumberContent" name="phoneNumberContent" [(ngModel)]="potentialCustomer.phoneNumber">
+    </div>
+    <div class="form-group">
+        <label>Number of Trainees</label>
+        <input class="form-control" placeholder="How many people want training?" type="text" id="numberOfTraineesContent" name="numberOfTraineesContent" [(ngModel)]="potentialCustomer.traineeNumber">
+    </div>
+    <div class="form-group">
+        <label>Age of Trainee(s)</label>
+        <input class="form-control" placeholder="Example : 12, 15, 17" type="text" id="ageContent" name="ageContent" [(ngModel)]="potentialCustomer.age">
+    </div>
+    <div class="form-group">
+        <label>How Long Would You Like to Train?</label>
+        <input class="form-control" placeholder="Example : 3 Months / 2 Weeks / Undecided" type="text" id="trainingDurationContent" name="trainingDurationContent" [(ngModel)]="potentialCustomer.trainingDuration">
     </div>
     <label>My communication preference:</label>
     <div class="radio">
