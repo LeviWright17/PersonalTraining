@@ -6,7 +6,10 @@
   <form #emailForm="ngForm" novalidate>
     <div class="form-group">
       <label >Name</label>
-      <input class="form-control" placeholder="First, Last" type="text" id="name" name="nameContent" [(ngModel)]="potentialCustomer.name">
+      <input class="form-control" placeholder="First, Last" type="text" id="name" name="nameContent" [(ngModel)]="potentialCustomer.name" (click)="verifyNameInput(potentialCustomer.name)">
+    </div>
+    <div class="field-error-text" *ngIf="potentialCustomerError.nameErrorFlag">
+      {{ potentialCustomerError.nameError }}
     </div>
     <div class="form-group">
       <label>Email Address</label>
@@ -17,37 +20,30 @@
         <input class="form-control" placeholder="10 digits, including aread code" type="text" id="phoneNumberContent" name="phoneNumberContent" [(ngModel)]="potentialCustomer.phoneNumber">
     </div>
     <div class="form-group">
-        <label>Number of Trainees</label>
-        <input class="form-control" placeholder="How many people want training?" type="text" id="numberOfTraineesContent" name="numberOfTraineesContent" [(ngModel)]="potentialCustomer.traineeNumber">
+      <label>Number of Trainees</label>
+      <select class="form-control" name="numberOfTrainees" [(ngModel)]="potentialCustomer.numberOfTrainees">
+        <option value="" disabled="true">-Select-</option>
+        <option *ngFor="let number of numberOfTrainees">
+          {{ number }}
+        </option>
+      </select>
     </div>
     <div class="form-group">
         <label>Age of Trainee(s)</label>
-        <input class="form-control" placeholder="Example : 12, 15, 17" type="text" id="ageContent" name="ageContent" [(ngModel)]="potentialCustomer.age">
+        <input class="form-control" placeholder="Example : 12, 17, 24, 35" type="text" id="ageContent" name="ageContent" [(ngModel)]="potentialCustomer.age">
     </div>
     <div class="form-group">
         <label>How Long Would You Like to Train?</label>
         <input class="form-control" placeholder="Example : 3 Months / 2 Weeks / Undecided" type="text" id="trainingDurationContent" name="trainingDurationContent" [(ngModel)]="potentialCustomer.trainingDuration">
     </div>
     <label>My communication preference:</label>
-    <div class="radio">
-      <span class="communication-preference-radio-spacing">
-      <label>
-        <input type="radio" name="communicationPreference" value="email" [(ngModel)]="potentialCustomer.communicationPreference" [checked]="true">
-        Email
-      </label>
-      </span>
-      <span class="communication-preference-radio-spacing">
-      <label>
-        <input type="radio" name="communicationPreference" value="text" [(ngModel)]="potentialCustomer.communicationPreference">
-        Text
-      </label>
-    </span>
-    <span class="communication-preference-radio-spacing">
-      <label>
-        <input type="radio" name="communicationPreference" value="phoneCall" [(ngModel)]="potentialCustomer.communicationPreference">
-        Phone Call
-      </label>
-      </span>
+    <div class="form-group">
+      <select class="form-control" name="communicationPreference" [(ngModel)]="potentialCustomer.communicationPreference">
+        <option value="" disabled="true">-Select-</option>
+        <option *ngFor="let preference of communicationPreferences">
+          {{ preference }}
+        </option>
+      </select>
     </div>
     <div class="form-group">
       <label>I'm Most Interested in Working On...</label>
@@ -62,6 +58,6 @@
         <label >Additional Comments</label>
         <textarea class="form-control" placeholder="Tell us about yourself! For Example : Experience level, Current teams you play for, and what you're hoping to get out of working with us." rows="8" id="emailContent" name="emailContent"  [(ngModel)]="potentialCustomer.additionalComments"></textarea>
       </div>
-    <button class="btn btn-primary btn-lg btn-block" type="submit" id="sendEmailButton" name="send" (click)="sendEmail()">Send</button>
+    <button class="btn btn-primary btn-lg btn-block save-button" type="submit" id="sendEmailButton" name="send" (click)="sendEmail()">Send</button>
   </form>
 </div>
