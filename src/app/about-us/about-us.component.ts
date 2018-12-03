@@ -17,19 +17,4 @@ export class AboutUsComponent implements OnInit, IAboutUs {
     // var result = this.aboutUsService.getAboutUsData().subscribe(); 
     // console.log(result, 'this is the result my dude'); 
   }
-
-  getProfilePhoto(){
-
-  }
-
-  loadCustomerReviews(){
-    //Make an api call to get all reviews from the db.
-  }
-
-  postNewReview(){
-    //Make an api call to post a new review.
-    this.loadCustomerReviews(); 
-  }
-
-
 }
