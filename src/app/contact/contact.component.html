@@ -24,27 +24,33 @@
       </span>
       <div class="form-group">
         <label>Confirm Email Address</label>
-        <input id="confirmEmail" type="text" class="form-control" placeholder="example@website.com" formControlName="confirmEmail" />
+        <input id="confirmEmail" type="text" class="form-control" placeholder="example@website.com" formControlName="confirmEmail" 
+        [ngClass]="{'field-error-border': !contactForm.get('emailGroup.confirmEmail').valid 
+        && (contactForm.get('emailGroup.confirmEmail').touched)}"/>
       </div>
       <span id="emailError" class="field-error-text" *ngIf="contactForm.get('emailGroup.confirmEmail').touched && !contactForm.get('emailGroup.confirmEmail').valid">
-          Email does not match what was entered
-        </span>
+        Email is invalid or does not match
+      </span>
     </div>
     <div formGroupName="phoneGroup">
       <div class="form-group">
         <label>Phone Number</label>
-        <input id="phone" type="text" class="form-control" maxlength="10" placeholder="(123) 123 - 1234" formControlName="phone" />
+        <input id="phone" type="text" class="form-control" maxlength="10" placeholder="(123) 123 - 1234"
+          formControlName="phone"  [ngClass]="{'field-error-border': !contactForm.get('phoneGroup.phone').valid 
+          && (contactForm.get('phoneGroup.phone').touched)}"/>
       </div>
       <div class="field-error-text" *ngIf="contactForm.get('phoneGroup.phone').touched && !contactForm.get('phoneGroup.phone').valid">
         {{phoneError}}
       </div>
       <div class="form-group">
         <label>Confirm Phone Number</label>
-        <input id="phone" type="text" class="form-control" placeholder="(123) 123 - 1234" formControlName="confirmPhone" />
+        <input id="phone" type="text" class="form-control" maxlength="10" placeholder="(123) 123 - 1234" formControlName="confirmPhone" 
+        [ngClass]="{'field-error-border': !contactForm.get('phoneGroup.confirmPhone').valid 
+        && (contactForm.get('phoneGroup.confirmPhone').touched)}"/>
       </div>
       <div class="field-error-text" *ngIf="contactForm.get('phoneGroup.confirmPhone').touched && !contactForm.get('phoneGroup.confirmPhone').valid">
-          Phone does not match what was entered
-        </div>
+        Phone is Invalid or does not match
+      </div>
     </div>
     <label>My Communication Preference:</label>
     <div class="form-group">
@@ -67,10 +73,14 @@
       </select>
     </div>
     <div class="form-group">
-      <label>Additional Comments</label>
-      <textarea id="additionalComments" class="form-control" placeholder="Tell us about yourself! For Example : Experience level, Current teams you play for, and what you're hoping to get out of working with us."
-        rows="6" id="emailContent" formControlName="additionalComments"></textarea>
+      <label>About Me</label>
+      <textarea id="aboutMe" class="form-control" placeholder="Tell us about yourself! For Example : Experience level, Current teams you play for, and what you're hoping to get out of working with us."
+        rows="6" formControlName="aboutMe"  [ngClass]="{'field-error-border': !contactForm.get('aboutMe').valid 
+        && (contactForm.get('aboutMe').touched)}"></textarea>
     </div>
+    <div class="field-error-text" *ngIf="contactForm.get('aboutMe').touched && !contactForm.get('aboutMe').valid">
+        About Me is a required field
+      </div>
     <button class="btn btn-primary btn-lg btn-block save-button" type="submit" id="sendEmailButton" [title]="contactForm.valid ? 'Send us an email' : 'Disabled until all required fields are filled with valid data'"
       [disabled]="!contactForm.valid">
       Send</button>

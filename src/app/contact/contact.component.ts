@@ -100,7 +100,7 @@ export class ContactComponent implements OnInit {
       }),
       communicationPreference: [this.defaultCommunicationPreference],
       primaryInterest: [''],
-      additionalComments: ['', [Validators.required, Validators.minLength(20)]]
+      aboutMe: ['', Validators.required]
     })
 
     this.setCommunicationPreference(this.defaultCommunicationPreference);
