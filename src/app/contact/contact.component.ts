@@ -32,11 +32,11 @@ import { formControlBinding } from '@angular/forms/src/directives/reactive_direc
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
-  public numberOfTrainees = [
+  numberOfTrainees = [
     1, 2, 3, 4, 5
   ]
 
-  public interests = [
+  interests = [
     'General Soccer Fitness',
     'Idividual Attacking',
     'Individual Defending',
@@ -53,23 +53,33 @@ export class ContactComponent implements OnInit {
     'Other'
   ];
 
-  public communicationPreferences = [
+  communicationPreferences = [
     'Email',
     'Text',
     'Phone Call'
   ]
 
+  defaultCommunicationPreference: string = 'phone';
+  requiredEmailErrorText: string = 'Must have a valid email.';
+  nonRequiredEmailErrorText: string = 'Email address is invalid';
+  requiredPhoneErrorText: string = 'Must have a valid phone number';
+  nonRequiredPhoneErrorText: string = 'Phone number is invalid'
+
+  emailError: string; 
+  phoneError: string; 
+
   contactForm: FormGroup;
   name = new FormControl();
   email = new FormControl();
-  confirmEmail = new FormControl(); 
+  confirmEmail = new FormControl();
   phone = new FormControl();
-  confirmPhone = new FormControl(); 
+  confirmPhone = new FormControl();
   communicationPreference = new FormControl();
   primaryInterest = new FormControl();
   additionalComments = new FormControl();
 
-  public potentialCustomer: potentialCustomer = new potentialCustomer();
+  potentialCustomer: potentialCustomer = new potentialCustomer();
+
 
 
   constructor(private formBuilder: FormBuilder) {
@@ -85,25 +95,47 @@ export class ContactComponent implements OnInit {
         confirmEmail: ['', [Validators.email]]
       }),
       phoneGroup: this.formBuilder.group({
-        phone: ['', [Validators.required, Validators.minLength(10), Validators.pattern("^[0-9]*$")]],
-        confirmPhone: ['', [Validators.required, Validators.minLength(10), Validators.pattern("^[0-9]*$")]],
+        phone: ['', [Validators.minLength(10), Validators.pattern("^[0-9]*$")]],
+        confirmPhone: ['', [Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]],
       }),
-      communicationPreference: ['email'],
+      communicationPreference: [this.defaultCommunicationPreference],
       primaryInterest: [''],
       additionalComments: ['', [Validators.required, Validators.minLength(20)]]
     })
+
+    this.setCommunicationPreference(this.defaultCommunicationPreference);
   }
 
   public setCommunicationPreference(selectedCommunicationPreference: string): void {
-    const emailControl = this.contactForm.get('email');
+    const emailControl = this.contactForm.get('emailGroup.email');
+    const confirmEmailControl = this.contactForm.get('emailGroup.confirmEmail'); 
+    const phoneControl = this.contactForm.get('phoneGroup.phone');
+    const confirmPhoneControl = this.contactForm.get('phoneGroup.confirmPhone');
+
     if (selectedCommunicationPreference === 'email') {
       emailControl.setValidators([Validators.required, Validators.email]);
+      confirmEmailControl.setValidators([Validators.required, Validators.email]);
+      
+      phoneControl.setValidators([Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]); 
+      confirmPhoneControl.setValidators([Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]);
+
+      this.emailError = this.requiredEmailErrorText; 
+      this.phoneError = this.nonRequiredPhoneErrorText; 
     }
     else {
-      emailControl.clearValidators();
+      emailControl.setValidators([Validators.email]);
+      confirmEmailControl.setValidators([Validators.email]);
+
+      phoneControl.setValidators([Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]); 
+      confirmPhoneControl.setValidators([Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]); 
+
+      this.emailError = this.nonRequiredEmailErrorText; 
+      this.phoneError = this.requiredPhoneErrorText; 
     }
     emailControl.updateValueAndValidity();
+    phoneControl.updateValueAndValidity();
   }
+  
 
   public sendEmail() {
     console.log("YAY");
