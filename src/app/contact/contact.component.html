@@ -1,61 +1,53 @@
 <div class="container">
   <h3>We'd Love to Hear From You!</h3>
-  <h5>We do our best to respond to our potential customers as quickly as possible. But if we can't get to you right away, we will respond within 48 hours.
+  <h5>We do our best to respond to our potential customers as quickly as possible. But if we can't get to you right
+    away, we will respond within 48 hours.
     We look forward to helping you reach your goals!
   </h5>
   <form (ngSubmit)="sendEmail()" [formGroup]="contactForm" novalidate>
     <div class="form-group">
-      <label >Name</label>
-      <input id="name" 
-              type="text" 
-              class="form-control" 
-              placeholder="First, Last" 
-              formControlName="name" />
+      <label>Name</label>
+      <input id="name" type="text" class="form-control" placeholder="First, Last" formControlName="name" />
     </div>
-    <div class="form-group">
-      <label>Email Address</label>
-      <input id="email" 
-              type="text"  
-              class="form-control" 
-              placeholder="example@website.com" 
-              formControlName="email"/>
+    <div formGroupName="emailGroup">
+      <div class="form-group">
+        <label>Email Address</label>
+        <input id="email" type="text" class="form-control" placeholder="example@website.com" formControlName="email" 
+            [ngClass]="{'field-error-border': !contactForm.get('emailGroup.email').valid 
+                                              && (contactForm.get('emailGroup.email').touched || contactForm.get('emailGroup.email').dirty) }"/>
       </div>
-    <div class="form-group">
-        <label>Phone Number</label>
-        <input id="phone" 
-              type="text"  
-              class="form-control" 
-              placeholder="(111) 222 - 3333" 
-              formControlName="phone"
-              [ngClass]="{'field-error-border' : !contactForm.get('phone').valid && contactForm.get('phone').touched}"/>
+      <div class="form-group">
+        <label>Confirm Email Address</label>  
+        <input id="confirmEmail" type="text" class="form-control" placeholder="example@website.com" formControlName="confirmEmail" />
+      </div> 
     </div>
-    <span class="field-error-text" *ngIf=" contactForm.get('phone').touched && contactForm.get('phone').valid"> 
-        Phone Number must be 10 digits
+    <div formGroupName="phoneGroup">
+    <div class="form-group">
+      <label>Phone Number</label>
+      <input id="phone" type="text" class="form-control" placeholder="(123) 123 - 1234" formControlName="phone"/>
+    </div>
+    <div class="form-group">
+      <label>Confirm Phone Number</label>
+      <input id="phone" type="text" class="form-control" placeholder="(123) 123 - 1234" formControlName="confirmPhone"/>
+    </div>
+  </div>
+    <span class="field-error-text" *ngIf=" contactForm.get('phoneGroup.phone').touched && contactForm.get('phoneGroup.phone').valid">
+      Phone Number must be 10 digits
     </span>
+    <label>My Communication Preference:</label>
     <div class="form-group">
-        <label class="communication-preference-radio-spacing">
-          <input 
-                id="emailRadio" 
-                type="radio" 
-                value="email" 
-                formControlName="communicationPreference"
-                (click)="setCommunicationPreference('email')"> Email
-        </label>
-        <label>
-          <input  
-                id="phoneRadio" 
-                type="radio" 
-                value="phone" 
-                formControlName="communicationPreference"
-                (click)="setCommunicationPreference('phone')"> Phone
-        </label>
-      </div>
+      <label class="communication-preference-radio-spacing">
+        <input id="emailRadio" type="radio" value="email" formControlName="communicationPreference" (click)="setCommunicationPreference('email')">
+        Email
+      </label>
+      <label>
+        <input id="phoneRadio" type="radio" value="phone" formControlName="communicationPreference" (click)="setCommunicationPreference('phone')">
+        Phone
+      </label>
+    </div>
     <div class="form-group">
       <label>I'm Most Interested in Working On...</label>
-      <select 
-              id="primaryInterest"
-              class="form-control"
-              formControlName="primaryInterest">
+      <select id="primaryInterest" class="form-control" formControlName="primaryInterest">
         <option value="" disabled="true">-Select-</option>
         <option *ngFor="let interest of interests">
           {{ interest }}
@@ -63,19 +55,12 @@
       </select>
     </div>
     <div class="form-group">
-        <label >Additional Comments</label>
-        <textarea 
-                id="additionalComments" 
-                class="form-control" 
-                placeholder="Tell us about yourself! For Example : Experience level, Current teams you play for, and what you're hoping to get out of working with us." 
-                rows="6" id="emailContent" 
-                formControlName="additionalComments"></textarea>
-      </div>
-    <button class="btn btn-primary btn-lg btn-block save-button" 
-            type="submit" 
-            id="sendEmailButton" 
-            [title]="contactForm.valid ? 'Send us an email' : 'Disabled until all required fields are filled with valid data'"
-            [disabled]="!contactForm.valid">
-                        Send</button>
+      <label>Additional Comments</label>
+      <textarea id="additionalComments" class="form-control" placeholder="Tell us about yourself! For Example : Experience level, Current teams you play for, and what you're hoping to get out of working with us."
+        rows="6" id="emailContent" formControlName="additionalComments"></textarea>
+    </div>
+    <button class="btn btn-primary btn-lg btn-block save-button" type="submit" id="sendEmailButton" [title]="contactForm.valid ? 'Send us an email' : 'Disabled until all required fields are filled with valid data'"
+      [disabled]="!contactForm.valid">
+      Send</button>
   </form>
 </div>
