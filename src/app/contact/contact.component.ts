@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { potentialCustomer } from '../models/potentialCustomer.model';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'; 
+import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms'; 
+
+function phoneNumberRange(control: AbstractControl): { [key: string]: boolean }  | null {
+  if(control.value !== null && (isNaN(control.value))){
+    return {'range': true}
+  }
+  return null; 
+}
 
 @Component({
   selector: 'app-contact',
@@ -56,7 +63,7 @@ export class ContactComponent implements OnInit {
     this.contactForm = this.formBuilder.group({
       name: ['', [Validators.required]], 
       email: ['', [Validators.email]],
-      phone: ['', [Validators.required, Validators.minLength(10)]], 
+      phone: ['', [Validators.required, Validators.minLength(10), Validators.pattern("^[0-9]*$")]],
       communicationPreference: ['email'],
       primaryInterest: [''],
       additionalComments: ['', [Validators.required, Validators.minLength(20)]] 
@@ -77,6 +84,8 @@ export class ContactComponent implements OnInit {
   public sendEmail(){
     console.log("YAY"); 
   }
+
+
 
   
 

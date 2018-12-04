@@ -29,6 +29,9 @@
               formControlName="phone"
               [ngClass]="{'field-error-border' : !contactForm.get('phone').valid && contactForm.get('phone').touched}"/>
     </div>
+    <span class="field-error-text" *ngIf=" contactForm.get('phone').touched && contactForm.get('phone').valid"> 
+        Phone Number must be 10 digits
+    </span>
     <div class="form-group">
         <label class="communication-preference-radio-spacing">
           <input 
@@ -47,16 +50,6 @@
                 (click)="setCommunicationPreference('phone')"> Phone
         </label>
       </div>
-    <!-- <div class="form-group">
-      <select id="communicationPreference" 
-              class="form-control"
-              formControlName="communicationPreference">
-        <option value="" disabled="true">-Select-</option>
-        <option *ngFor="let preference of communicationPreferences">
-          {{ preference }}
-        </option>
-      </select>
-    </div> -->
     <div class="form-group">
       <label>I'm Most Interested in Working On...</label>
       <select 
