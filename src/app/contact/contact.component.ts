@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { potentialCustomer } from '../models/potentialCustomer.model';
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl, ValidatorFn, AbstractControlOptions } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators'; 
 
 //This is an example of how to do a custom validator. Custom validators can only take in 
 //one argument, which is the abstract control. 
@@ -143,7 +144,9 @@ export class ContactComponent implements OnInit {
     .valueChanges.subscribe(value => this.setCommunicationPreference(value)); 
 
     const emailControl = this.contactForm.get('emailGroup.email'); 
-    emailControl.valueChanges.subscribe(value => this.setMessage(emailControl)); 
+    emailControl.valueChanges.pipe(
+      debounceTime(1000)
+    ).subscribe(value => this.setMessage(emailControl)); 
 
   }
 
