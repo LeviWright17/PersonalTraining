@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { potentialCustomer } from '../models/potentialCustomer.model';
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl, ValidatorFn, AbstractControlOptions } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 
 //This is an example of how to do a custom validator. Custom validators can only take in 
 //one argument, which is the abstract control. 
@@ -22,9 +23,11 @@ import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl, Valid
 //   }
 // }
 
+//RE WATCH THE 'REACTING TO CHANGES' AND APPLY THAT HERE. A LITTLE OUT OF SCOPE FOR RN.
+
 function matchEmailFields(control: AbstractControl): { [key: string]: boolean } | null {
-  const startControl = control.get('email'); 
-  const endControl = control.get('confirmEmail'); 
+  const startControl = control.get('email');
+  const endControl = control.get('confirmEmail');
   if (startControl.pristine || endControl.pristine) {
     return null;
   }
@@ -36,8 +39,8 @@ function matchEmailFields(control: AbstractControl): { [key: string]: boolean } 
 }
 
 function matchPhoneFields(control: AbstractControl): { [key: string]: boolean } | null {
-  const startControl = control.get('phone'); 
-  const endControl = control.get('confirmPhone'); 
+  const startControl = control.get('phone');
+  const endControl = control.get('confirmPhone');
 
   if (startControl.pristine || endControl.pristine) {
     return null;
@@ -88,10 +91,33 @@ export class ContactComponent implements OnInit {
   requiredEmailErrorText: string = 'Must have a valid email.';
   nonRequiredEmailErrorText: string = 'Email address is invalid';
   requiredPhoneErrorText: string = 'Must have a valid phone number';
-  nonRequiredPhoneErrorText: string = 'Phone number is invalid'
+  nonRequiredPhoneErrorText: string = 'Phone number is invalid';
 
-  emailError: string;
-  phoneError: string;
+  // private validationMessages = {
+  //   defaultCommunicationPreference: 'phone',
+  //   requiredEmailErrorText: 'Must have a valid email.',
+  //   nonRequiredEmailErrorText: 'Email address is invalid',
+  //   requiredPhoneErrorText: 'Must have a valid phone number',
+  //   nonRequiredPhoneErrorText: 'Phone number is invalid'
+  // }
+
+  // private validationFlags = {
+  //   name: true,
+  //   email: true,
+  //   confirmEmail: true,
+  //   phone: true,
+  //   confirmPhone: true,
+  //   aboutMe: true
+  // }
+
+  emailValidationMessages = {
+    requiredEmailErrorText: 'Must have a valid email.',
+    nonRequiredEmailErrorText: 'Email address is invalid',
+  }
+
+
+  emailValidationMessage: string;
+  phoneValidationMessage: string;
 
   contactForm: FormGroup;
   name = new FormControl();
@@ -130,7 +156,23 @@ export class ContactComponent implements OnInit {
       aboutMe: ['', Validators.required]
     })
 
-    this.setCommunicationPreference(this.defaultCommunicationPreference);
+    this.contactForm.get('communicationPreference')
+      .valueChanges.subscribe(value => this.setCommunicationPreference(value));
+
+    const emailControl = this.contactForm.get('emailGroup.email');
+    emailControl.valueChanges.subscribe(value => this.setEmailMessage(emailControl));
+
+  }
+
+  setEmailMessage(control: AbstractControl): void {
+    console.log("I am being called"); 
+    this.emailValidationMessage = '';
+    console.log(control, 'CONTROL');
+    if ((control.touched || control.dirty) && control.errors) {
+      this.emailValidationMessage = Object.keys(control.errors).map(
+        key => this.emailValidationMessage += this.emailValidationMessages[key]).join(' ');
+        
+    }
   }
 
   public setCommunicationPreference(selectedCommunicationPreference: string): void {
@@ -146,8 +188,8 @@ export class ContactComponent implements OnInit {
       phoneControl.setValidators([Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]);
       confirmPhoneControl.setValidators([Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]);
 
-      this.emailError = this.requiredEmailErrorText;
-      this.phoneError = this.nonRequiredPhoneErrorText;
+      this.emailValidationMessage = this.requiredEmailErrorText;
+      this.phoneValidationMessage = this.nonRequiredPhoneErrorText;
     }
     else {
       emailControl.setValidators([Validators.email]);
@@ -156,8 +198,8 @@ export class ContactComponent implements OnInit {
       phoneControl.setValidators([Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]);
       confirmPhoneControl.setValidators([Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]);
 
-      this.emailError = this.nonRequiredEmailErrorText;
-      this.phoneError = this.requiredPhoneErrorText;
+      this.emailValidationMessage = this.nonRequiredEmailErrorText;
+      this.phoneValidationMessage = this.requiredPhoneErrorText;
     }
     emailControl.updateValueAndValidity();
     phoneControl.updateValueAndValidity();
