@@ -115,7 +115,12 @@ export class ContactComponent implements OnInit {
     email: 'Email address is invalid',
   }
 
+  private nameValidationMessages = {
+    required: 'Name is a required field'
+  }
 
+
+  nameValidationMessage: string; 
   emailValidationMessage: string;
   phoneValidationMessage: string;
 
@@ -159,22 +164,40 @@ export class ContactComponent implements OnInit {
     this.contactForm.get('communicationPreference')
       .valueChanges.subscribe(value => this.setCommunicationPreference(value));
 
+    const nameControl = this.contactForm.get('name'); 
+    nameControl.statusChanges.subscribe(value => this.setNameMessage(nameControl, this.nameValidationMessage, this.nameValidationMessages));
+
     const emailControl = this.contactForm.get('emailGroup.email');
     emailControl.valueChanges.subscribe(value => this.setEmailMessage(emailControl));
+
+  }
+
+  setNameMessage(control: AbstractControl, message: string, messagesObject: any): void {
+    console.log(control, 'before entering control'); 
+    this.nameValidationMessage = this.setErrorMessage(control, message, messagesObject); 
+  }
+
+  setErrorMessage(control: AbstractControl, message: string, messagesObject: any): string {
+    message = ''; 
+    console.log(control, 'THIS IS THE CONTROL FOR  NAME'); 
+    console.log(control.touched, 'TOUCHED'); 
+    console.log(control.dirty, 'dirty'); 
+    console.log(control.errors, 'errors'); 
+    console.log(control.valid, 'valid'); 
+    if ((control.touched || control.dirty) && !control.valid) {
+      message = Object.keys(control.errors).map( 
+        key => message += messagesObject[key]).join(' ');
+        console.log(message, 'message'); 
+    }
+    return message; 
   }
 
   setEmailMessage(control: AbstractControl): void {
-    console.log("I am being called"); 
     this.emailValidationMessage = '';
-    console.log(control, 'CONTROL');
-    console.log(this.emailValidationMessage, 'VALIDATION MESSAGE BEFORE'); 
-    console.log(control.errors, 'CONTROL ERRORS'); 
-
     if ((control.touched || control.dirty) && control.errors) {
       this.emailValidationMessage = Object.keys(control.errors).map(
         key => this.emailValidationMessage += this.emailValidationMessages[key]).join(' ');
     }
-    console.log(this.emailValidationMessage, 'VALIDATION MESSAGE'); 
   }
 
   public setCommunicationPreference(selectedCommunicationPreference: string): void {

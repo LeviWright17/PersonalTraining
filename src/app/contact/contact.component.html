@@ -7,11 +7,10 @@
   <form (ngSubmit)="sendEmail()" [formGroup]="contactForm" novalidate>
     <div class="form-group">
       <label>Name</label>
-      <input id="name" type="text" class="form-control" placeholder="First, Last" formControlName="name" 
-            [ngClass]="{'is-invalid': !contactForm.get('name').valid && (contactForm.get('name').touched)}" />
+      <input id="name" type="text" class="form-control" placeholder="First, Last" formControlName="name" [ngClass]="{'is-invalid': nameValidationMessage }" />
     </div>
     <span id="nameError" class="field-error-text" *ngIf="contactForm.get('name').touched && contactForm.get('name').errors?.required">
-      Name is a required field.
+      {{nameValidationMessage}}
     </span>
     <div formGroupName="emailGroup">
       <div class="form-group">
@@ -19,8 +18,6 @@
         <input id="email" type="text" class="form-control" placeholder="example@website.com" formControlName="email"
           [ngClass]="{'is-invalid': emailValidationMessage }" />
       </div>
-      <!-- <span id="emailError" class="field-error-text" *ngIf="contactForm.get('emailGroup.email').touched 
-                                                            && !contactForm.get('emailGroup.email').valid"> -->
       <span id="emailError" class="field-error-text">
         {{emailValidationMessage}}
       </span>
