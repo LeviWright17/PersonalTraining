@@ -91,11 +91,23 @@ export class ContactComponent implements OnInit {
   requiredPhoneErrorText: string = 'Must have a valid phone number';
   nonRequiredPhoneErrorText: string = 'Phone number is invalid'
 
-  emailValidationMessage: string; 
+  nameValidationMessage: string; 
+  nameValidationMessages = {
+    required: 'Your name is required'
+  }
 
+
+  emailValidationMessage: string; 
   emailValidationMessages = {
     required: 'A valid email is required',
-    email: 'Email entered is Invalid'
+    email: 'Email entered is Invalid',
+    match: 'Email addresses do not match'
+  }
+
+  phoneValidationMessage: string; 
+  phoneValidationMessages = {
+    required: 'A valid phone number is required',
+    match: 'Phone numbers do not match'
   }
 
   emailError: string;
@@ -119,38 +131,21 @@ export class ContactComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.contactForm = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      emailGroup: this.formBuilder.group({
-        email: ['', [Validators.email]],
-        confirmEmail: ['', [Validators.email]]
-      }, {
-          validator: matchEmailFields
-        }),
-      phoneGroup: this.formBuilder.group({
-        phone: ['', [Validators.minLength(10), Validators.pattern("^[0-9]*$")]],
-        confirmPhone: ['', [Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]],
-      }, {
-          validator: matchPhoneFields
-        }),
-      communicationPreference: [this.defaultCommunicationPreference],
-      primaryInterest: [''],
-      aboutMe: ['', Validators.required]
-    })
-
-    this.setCommunicationPreference(this.defaultCommunicationPreference);
-
-    this.contactForm.get('communicationPreference')
-    .valueChanges.subscribe(value => this.setCommunicationPreference(value)); 
-
-    const emailControl = this.contactForm.get('emailGroup.email'); 
-    emailControl.valueChanges.pipe(
-      debounceTime(1000)
-    ).subscribe(value => this.setMessage(emailControl)); 
-
+    this.runValidation();
+    this.setCommunicationPreference(this.contactForm.get('communicationPreference').value); 
+    this.watchNameControl();
+    this.watchEmailControl(); 
   }
 
-  setMessage(c: AbstractControl): void{
+  setNameMessage(c: AbstractControl): void{
+    this.nameValidationMessage = ''; 
+    if((c.touched || c.dirty) && c.errors){
+      this.nameValidationMessage = Object.keys(c.errors).map(
+        key => this.nameValidationMessage += this.nameValidationMessages[key]).join(' '); 
+    }
+  }
+
+  setEmailMessage(c: AbstractControl): void{
     this.emailValidationMessage = ''; 
     if((c.touched || c.dirty) && c.errors){
       this.emailValidationMessage = Object.keys(c.errors).map(
@@ -186,6 +181,8 @@ export class ContactComponent implements OnInit {
     }
     emailControl.updateValueAndValidity();
     phoneControl.updateValueAndValidity();
+
+    console.log(this.phoneError, 'phone error'); 
   }
 
 
@@ -193,10 +190,36 @@ export class ContactComponent implements OnInit {
     console.log("YAY");
   }
 
+  private runValidation() {
+    this.contactForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      emailGroup: this.formBuilder.group({
+        email: ['', [Validators.email]],
+        confirmEmail: ['', [Validators.email]]
+      }, {
+          validator: matchEmailFields
+        }),
+      phoneGroup: this.formBuilder.group({
+        phone: ['', [Validators.minLength(10), Validators.pattern("^[0-9]*$")]],
+        confirmPhone: ['', [Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]],
+      }, {
+          validator: matchPhoneFields
+        }),
+      communicationPreference: [this.defaultCommunicationPreference],
+      primaryInterest: [''],
+      aboutMe: ['', Validators.required]
+    });
+  }
 
+  private watchNameControl() {
+    const nameControl = this.contactForm.get('name');
+    nameControl.valueChanges.pipe(debounceTime(500)).subscribe(value => this.setNameMessage(nameControl));
+  }
 
-
-
+  private watchEmailControl() {
+    const emailControl = this.contactForm.get('emailGroup.email');
+    emailControl.valueChanges.pipe(debounceTime(1000)).subscribe(value => this.setEmailMessage(emailControl));
+  }
 
   // VERY USEFUL TO REMEMBER!!
 
