@@ -1,3 +1,4 @@
+<!--Probably want to add dirty to some of these. the behavior is al ittle weird sometimes.-->
 <div class="container">
   <h3>We'd Love to Hear From You!</h3>
   <h5>We do our best to respond to our potential customers as quickly as possible. But if we can't get to you right
@@ -48,11 +49,13 @@
       <div class="form-group">
         <label>Confirm Phone Number</label>
         <input id="phone" type="text" class="form-control" maxlength="10" placeholder="(123) 123 - 1234"
-          formControlName="confirmPhone" [ngClass]="{'is-invalid':  contactForm.get('emailGroup').errors ||
-                                                                    !contactForm.get('phoneGroup.confirmPhone').valid 
-                                                                    && (contactForm.get('phoneGroup.confirmPhone').touched)}" />
+          formControlName="confirmPhone" [ngClass]="{'is-invalid':  contactForm.get('phoneGroup').errors ||
+          !contactForm.get('phoneGroup.confirmPhone').valid 
+          && (contactForm.get('phoneGroup.confirmPhone').touched)}" />
       </div>
-      <div class="field-error-text" *ngIf="contactForm.get('phoneGroup.confirmPhone').touched && !contactForm.get('phoneGroup.confirmPhone').valid">
+      <div class="field-error-text" *ngIf=" (contactForm.get('phoneGroup.confirmPhone').touched 
+      && !contactForm.get('phoneGroup.confirmPhone').valid) 
+      || contactForm.get('phoneGroup').errors">
         Phone is Invalid or does not match
       </div>
     </div>
