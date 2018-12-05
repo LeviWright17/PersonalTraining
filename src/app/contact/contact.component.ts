@@ -90,6 +90,13 @@ export class ContactComponent implements OnInit {
   requiredPhoneErrorText: string = 'Must have a valid phone number';
   nonRequiredPhoneErrorText: string = 'Phone number is invalid'
 
+  emailValidationMessage: string; 
+
+  emailValidationMessages = {
+    required: 'A valid email is required',
+    email: 'Email entered is Invalid'
+  }
+
   emailError: string;
   phoneError: string;
 
@@ -131,6 +138,21 @@ export class ContactComponent implements OnInit {
     })
 
     this.setCommunicationPreference(this.defaultCommunicationPreference);
+
+    this.contactForm.get('communicationPreference')
+    .valueChanges.subscribe(value => this.setCommunicationPreference(value)); 
+
+    const emailControl = this.contactForm.get('emailGroup.email'); 
+    emailControl.valueChanges.subscribe(value => this.setMessage(emailControl)); 
+
+  }
+
+  setMessage(c: AbstractControl): void{
+    this.emailValidationMessage = ''; 
+    if((c.touched || c.dirty) && c.errors){
+      this.emailValidationMessage = Object.keys(c.errors).map(
+        key => this.emailValidationMessage += this.emailValidationMessages[key]).join(' '); 
+    }
   }
 
   public setCommunicationPreference(selectedCommunicationPreference: string): void {
