@@ -110,9 +110,9 @@ export class ContactComponent implements OnInit {
   //   aboutMe: true
   // }
 
-  emailValidationMessages = {
-    requiredEmailErrorText: 'Must have a valid email.',
-    nonRequiredEmailErrorText: 'Email address is invalid',
+  private emailValidationMessages = {
+    required: 'Must have a valid email.',
+    email: 'Email address is invalid',
   }
 
 
@@ -161,18 +161,20 @@ export class ContactComponent implements OnInit {
 
     const emailControl = this.contactForm.get('emailGroup.email');
     emailControl.valueChanges.subscribe(value => this.setEmailMessage(emailControl));
-
   }
 
   setEmailMessage(control: AbstractControl): void {
     console.log("I am being called"); 
     this.emailValidationMessage = '';
     console.log(control, 'CONTROL');
+    console.log(this.emailValidationMessage, 'VALIDATION MESSAGE BEFORE'); 
+    console.log(control.errors, 'CONTROL ERRORS'); 
+
     if ((control.touched || control.dirty) && control.errors) {
       this.emailValidationMessage = Object.keys(control.errors).map(
         key => this.emailValidationMessage += this.emailValidationMessages[key]).join(' ');
-        
     }
+    console.log(this.emailValidationMessage, 'VALIDATION MESSAGE'); 
   }
 
   public setCommunicationPreference(selectedCommunicationPreference: string): void {
@@ -209,11 +211,6 @@ export class ContactComponent implements OnInit {
   public sendEmail() {
     console.log("YAY");
   }
-
-
-
-
-
 
   // VERY USEFUL TO REMEMBER!!
 

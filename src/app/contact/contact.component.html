@@ -7,9 +7,10 @@
   <form (ngSubmit)="sendEmail()" [formGroup]="contactForm" novalidate>
     <div class="form-group">
       <label>Name</label>
-      <input id="name" type="text" class="form-control" placeholder="First, Last" formControlName="name" [ngClass]="{'is-invalid': !contactForm.get('name').valid && (contactForm.get('name').touched)}" />
+      <input id="name" type="text" class="form-control" placeholder="First, Last" formControlName="name" 
+            [ngClass]="{'is-invalid': !contactForm.get('name').valid && (contactForm.get('name').touched)}" />
     </div>
-    <span id="nameError" class="field-error-text" *ngIf="contactForm.get('name').touched && !contactForm.get('name').valid">
+    <span id="nameError" class="field-error-text" *ngIf="contactForm.get('name').touched && contactForm.get('name').errors?.required">
       Name is a required field.
     </span>
     <div formGroupName="emailGroup">
@@ -18,14 +19,15 @@
         <input id="email" type="text" class="form-control" placeholder="example@website.com" formControlName="email"
           [ngClass]="{'is-invalid': emailValidationMessage }" />
       </div>
-      <span id="emailError" class="field-error-text" *ngIf="contactForm.get('emailGroup.email').touched 
-                                                            && !contactForm.get('emailGroup.email').valid">
+      <!-- <span id="emailError" class="field-error-text" *ngIf="contactForm.get('emailGroup.email').touched 
+                                                            && !contactForm.get('emailGroup.email').valid"> -->
+      <span id="emailError" class="field-error-text">
         {{emailValidationMessage}}
       </span>
       <div class="form-group">
         <label>Confirm Email Address</label>
         <input id="confirmEmail" type="text" class="form-control" placeholder="example@website.com" formControlName="confirmEmail"
-                      [ngClass]="{'is-invalid': contactForm.get('emailGroup').errors ||
+          [ngClass]="{'is-invalid': contactForm.get('emailGroup').errors ||
                                                 !contactForm.get('emailGroup.confirmEmail').valid 
                                                 && (contactForm.get('emailGroup.confirmEmail').touched)}" />
       </div>
@@ -53,7 +55,7 @@
                                                                     !contactForm.get('phoneGroup.confirmPhone').valid 
                                                                     && (contactForm.get('phoneGroup.confirmPhone').touched)}" />
       </div>
-      <div class="field-error-text" *ngIf="contactForm.get('phoneGroup.confirmPhone').touched && !contactForm.get('phoneGroup.confirmPhone').valid">
+      <div class="field-error-text" *ngIf="contactForm.get('phoneGroup.confirmPhone').touched && contactForm.get('phoneGroup').errors">
         Phone is Invalid or does not match
       </div>
     </div>
@@ -83,7 +85,7 @@
         rows="6" formControlName="aboutMe" [ngClass]="{'is-invalid': !contactForm.get('aboutMe').valid 
         && (contactForm.get('aboutMe').touched)}"></textarea>
     </div>
-    <div class="field-error-text" *ngIf="contactForm.get('aboutMe').touched && !contactForm.get('aboutMe').valid">
+    <div class="field-error-text" *ngIf="contactForm.get('aboutMe').touched && contactForm.get('aboutMe').errors?.required">
       About Me is a required field
     </div>
     <button class="btn btn-primary btn-lg btn-block save-button" type="submit" id="sendEmailButton" [title]="contactForm.valid ? 'Send us an email' : 'Disabled until all required fields are filled with valid data'"
