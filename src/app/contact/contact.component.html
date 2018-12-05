@@ -20,15 +20,16 @@
                                     !contactForm.get('emailGroup.email').valid 
                                     && (contactForm.get('emailGroup.email').touched)}" />
       </div>
-      <span id="emailError" class="field-error-text" *ngIf="contactForm.get('emailGroup.email').touched && !contactForm.get('emailGroup.email').valid">
+      <span id="emailError" class="field-error-text" *ngIf="contactForm.get('emailGroup.email').touched 
+                                                            && !contactForm.get('emailGroup.email').valid">
         {{emailError}}
       </span>
       <div class="form-group">
         <label>Confirm Email Address</label>
         <input id="confirmEmail" type="text" class="form-control" placeholder="example@website.com" formControlName="confirmEmail"
-          [ngClass]="{'is-invalid': contactForm.get('emailGroup').errors ||
-                                    !contactForm.get('emailGroup.confirmEmail').valid 
-                                    && (contactForm.get('emailGroup.confirmEmail').touched)}" />
+                      [ngClass]="{'is-invalid': contactForm.get('emailGroup').errors ||
+                                                !contactForm.get('emailGroup.confirmEmail').valid 
+                                                && (contactForm.get('emailGroup.confirmEmail').touched)}" />
       </div>
       <span id="emailError" class="field-error-text" *ngIf="(contactForm.get('emailGroup.confirmEmail').touched 
                                                             && !contactForm.get('emailGroup.confirmEmail').valid) 
@@ -40,8 +41,9 @@
       <div class="form-group">
         <label>Phone Number</label>
         <input id="phone" type="text" class="form-control" maxlength="10" placeholder="(123) 123 - 1234"
-          formControlName="phone" [ngClass]="{'is-invalid': !contactForm.get('phoneGroup.phone').valid 
-          && (contactForm.get('phoneGroup.phone').touched)}" />
+          formControlName="phone" [ngClass]="{'is-invalid': contactForm.get('phoneGroup').errors ||
+                                                            !contactForm.get('phoneGroup.phone').valid 
+                                                            && (contactForm.get('phoneGroup.phone').touched)}" />
       </div>
       <div class="field-error-text" *ngIf="contactForm.get('phoneGroup.phone').touched && !contactForm.get('phoneGroup.phone').valid">
         {{phoneError}}
@@ -49,8 +51,9 @@
       <div class="form-group">
         <label>Confirm Phone Number</label>
         <input id="phone" type="text" class="form-control" maxlength="10" placeholder="(123) 123 - 1234"
-          formControlName="confirmPhone" [ngClass]="{'is-invalid': !contactForm.get('phoneGroup.confirmPhone').valid 
-        && (contactForm.get('phoneGroup.confirmPhone').touched)}" />
+          formControlName="confirmPhone" [ngClass]="{'is-invalid':  contactForm.get('emailGroup').errors ||
+                                                                    !contactForm.get('phoneGroup.confirmPhone').valid 
+                                                                    && (contactForm.get('phoneGroup.confirmPhone').touched)}" />
       </div>
       <div class="field-error-text" *ngIf="contactForm.get('phoneGroup.confirmPhone').touched && !contactForm.get('phoneGroup.confirmPhone').valid">
         Phone is Invalid or does not match

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { potentialCustomer } from '../models/potentialCustomer.model';
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl, ValidatorFn, AbstractControlOptions } from '@angular/forms';
-import { formControlBinding } from '@angular/forms/src/directives/reactive_directives/form_control_directive';
 
 //This is an example of how to do a custom validator. Custom validators can only take in 
 //one argument, which is the abstract control. 
