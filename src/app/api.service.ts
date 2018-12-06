@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ApiService {
   private apiEndpoint: String = '/api';
   private headers: HttpHeaders = new HttpHeaders({
@@ -12,13 +15,8 @@ export class ApiService {
   constructor(private http: HttpClient) {
   }
 
-  get(path) {
-    const response = this.http.get(`${this.apiEndpoint}${path}`, { headers: this.headers });
-    return response;
+  get(path: string): Observable<any>{
+    return this.http.get<any>(path); 
   }
 
-  post(path) {
-    const response = this.http.get(`${this.apiEndpoint}${path}`, { headers: this.headers });
-    return response;
-  }
 }

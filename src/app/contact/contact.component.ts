@@ -2,26 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { potentialCustomer } from '../models/potentialCustomer.model';
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl, ValidatorFn, AbstractControlOptions } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators'; 
-
-//This is an example of how to do a custom validator. Custom validators can only take in 
-//one argument, which is the abstract control. 
-// function phoneNumberRange(control: AbstractControl): { [key: string]: boolean }  | null {
-//   if(control.value !== null && (isNaN(control.value))){
-//     return {'range': true}
-//   }
-//   return null; 
-// }
-
-//If you want a validator that can take in more arguments, you have to get tricky and create
-//a factory function like this : 
-// function ratingRange(min: number, max: number): ValidatorFn {
-//   return (c: AbstractControl): { [key: string]: boolean } | null => {
-//     if (c.value !== null && (isNaN(c.value) || c.value < min || c.value > max)) {
-//       return { 'range': true }
-//     }
-//     return null;
-//   }
-// }
+import { ContactService } from './contact.service';
+import { Observable } from 'rxjs';
+import { JsonPipe } from '@angular/common';
 
 function matchEmailFields(control: AbstractControl): { [key: string]: boolean } | null {
   const startControl = control.get('email'); 
@@ -125,7 +108,7 @@ export class ContactComponent implements OnInit {
 
   potentialCustomer: potentialCustomer = new potentialCustomer();
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private contactservice: ContactService) {
     this.potentialCustomer.primaryInterest = '';
     this.potentialCustomer.communicationPreference = '';
   }
@@ -187,8 +170,14 @@ export class ContactComponent implements OnInit {
 
 
   public sendEmail() {
-    console.log("YAY");
-  }
+    console.log('i AM BEING CALLED'); 
+    var result; 
+    result = this.contactservice.makeAsyncCall().subscribe(
+      data => result = data,
+      err => console.log(err), 
+      () => console.log('DONE GETTING DATA', result)
+      ) 
+ }
 
   private runValidation() {
     this.contactForm = this.formBuilder.group({
@@ -220,42 +209,4 @@ export class ContactComponent implements OnInit {
     const emailControl = this.contactForm.get('emailGroup.email');
     emailControl.valueChanges.pipe(debounceTime(1000)).subscribe(value => this.setEmailMessage(emailControl));
   }
-
-  // VERY USEFUL TO REMEMBER!!
-
-  //----THE OLD WAY OF DOING THIS ----
-
-  // public defaultsSomeOfYourStuff(){
-  //   this.contactForm.patchValue({
-  //     //same thing here as below
-  //   })
-  // }
-
-  // public thisWillDefaultYourTextboxesEtc(){
-  //patch value requires that ALL fields in the form group are filled out, otherwise, 
-  //you will get an error. 
-  // this.contactForm.setValue({
-  // name: 'someName',
-  // email: 'someemail',
-  // phone: 'some phone', 
-  // communicationPreference: 'select',
-  // primaryInterest: 'select',
-  // additionalComments: 'comments'
-  // })
-  // }
-
-  //-- THE FORM BUILDER WAY OF DOING THIS -- 
-  //--> this is what you're actually using. Notice that you default to an empty string in 
-  //    your select boxes, and that makes your default disabled value of -select-
-
-  // ngOnInit() : void {
-  //   this.contactForm = this.formBuilder.group({
-  //     name: '', 
-  //     email: '',
-  //     phone: '', 
-  //     communicationPreference: '',
-  //     primaryInterest: '',
-  //     additionalComments: ''
-  //   })
-  // }
 }
