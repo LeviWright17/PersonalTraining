@@ -1,4 +1,4 @@
- export class potentialCustomer {
+ export class contact {
     public name: string; 
     public email: string; 
     public phone: string; 

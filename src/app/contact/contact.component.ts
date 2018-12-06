@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { potentialCustomer } from '../models/potentialCustomer.model';
+import { Component, OnInit, Version, VERSION } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { contact } from '../models/contact.model';
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl, ValidatorFn, AbstractControlOptions } from '@angular/forms';
-import { debounceTime } from 'rxjs/operators'; 
+import { debounceTime } from 'rxjs/operators';
 import { ContactService } from './contact.service';
 import { Observable } from 'rxjs';
-import { JsonPipe } from '@angular/common';
+import { contactError } from '../models/contactError.model';
+// import {  }
 
 function matchEmailFields(control: AbstractControl): { [key: string]: boolean } | null {
-  const startControl = control.get('email'); 
-  const endControl = control.get('confirmEmail'); 
+  const startControl = control.get('email');
+  const endControl = control.get('confirmEmail');
   if (startControl.pristine || endControl.pristine) {
     return null;
   }
@@ -20,8 +22,8 @@ function matchEmailFields(control: AbstractControl): { [key: string]: boolean } 
 }
 
 function matchPhoneFields(control: AbstractControl): { [key: string]: boolean } | null {
-  const startControl = control.get('phone'); 
-  const endControl = control.get('confirmPhone'); 
+  const startControl = control.get('phone');
+  const endControl = control.get('confirmPhone');
 
   if (startControl.pristine || endControl.pristine) {
     return null;
@@ -74,20 +76,19 @@ export class ContactComponent implements OnInit {
   requiredPhoneErrorText: string = 'Must have a valid phone number';
   nonRequiredPhoneErrorText: string = 'Phone number is invalid'
 
-  nameValidationMessage: string; 
+  nameValidationMessage: string;
   nameValidationMessages = {
     required: 'Your name is required'
   }
 
-
-  emailValidationMessage: string; 
+  emailValidationMessage: string;
   emailValidationMessages = {
     required: 'A valid email is required',
     email: 'Email entered is Invalid',
     match: 'Email addresses do not match'
   }
 
-  phoneValidationMessage: string; 
+  phoneValidationMessage: string;
   phoneValidationMessages = {
     required: 'A valid phone number is required',
     match: 'Phone numbers do not match'
@@ -106,33 +107,38 @@ export class ContactComponent implements OnInit {
   primaryInterest = new FormControl();
   additionalComments = new FormControl();
 
-  potentialCustomer: potentialCustomer = new potentialCustomer();
+  contact: contact = new contact();
 
-  constructor(private formBuilder: FormBuilder, private contactservice: ContactService) {
-    this.potentialCustomer.primaryInterest = '';
-    this.potentialCustomer.communicationPreference = '';
+  constructor(private formBuilder: FormBuilder, private contactservice: ContactService,
+    private titleService: Title) {
+    this.contact.primaryInterest = '';
+    this.contact.communicationPreference = '';
   }
 
   ngOnInit(): void {
+    
+    this.titleService.setTitle(`Personal Training' ${VERSION.full}`); 
     this.runValidation();
-    this.setCommunicationPreference(this.contactForm.get('communicationPreference').value); 
+    this.setCommunicationPreference(this.contactForm.get('communicationPreference').value);
     this.watchNameControl();
-    this.watchEmailControl(); 
+    this.watchEmailControl();
+    
+    throw new Error('Ugly error'); 
   }
 
-  setNameMessage(c: AbstractControl): void{
-    this.nameValidationMessage = ''; 
-    if((c.touched || c.dirty) && c.errors){
+  setNameMessage(c: AbstractControl): void {
+    this.nameValidationMessage = '';
+    if ((c.touched || c.dirty) && c.errors) {
       this.nameValidationMessage = Object.keys(c.errors).map(
-        key => this.nameValidationMessage += this.nameValidationMessages[key]).join(' '); 
+        key => this.nameValidationMessage += this.nameValidationMessages[key]).join(' ');
     }
   }
 
-  setEmailMessage(c: AbstractControl): void{
-    this.emailValidationMessage = ''; 
-    if((c.touched || c.dirty) && c.errors){
+  setEmailMessage(c: AbstractControl): void {
+    this.emailValidationMessage = '';
+    if ((c.touched || c.dirty) && c.errors) {
       this.emailValidationMessage = Object.keys(c.errors).map(
-        key => this.emailValidationMessage += this.emailValidationMessages[key]).join(' '); 
+        key => this.emailValidationMessage += this.emailValidationMessages[key]).join(' ');
     }
   }
 
@@ -164,20 +170,17 @@ export class ContactComponent implements OnInit {
     }
     emailControl.updateValueAndValidity();
     phoneControl.updateValueAndValidity();
-
-    console.log(this.phoneError, 'phone error'); 
   }
 
 
   public sendEmail() {
-    console.log('i AM BEING CALLED'); 
-    var result; 
+    var result;
     result = this.contactservice.makeAsyncCall().subscribe(
       data => result = data,
-      err => console.log(err), 
+      (err: contactError) => console.log(err.friendlyMessage),
       () => console.log('DONE GETTING DATA', result)
-      ) 
- }
+    )
+  }
 
   private runValidation() {
     this.contactForm = this.formBuilder.group({
