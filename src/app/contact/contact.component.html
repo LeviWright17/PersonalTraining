@@ -5,7 +5,7 @@
     away, we will respond within 48 hours.
     We look forward to helping you reach your goals!
   </h5>
-  <form (ngSubmit)="sendEmail()" [formGroup]="contactForm" novalidate>
+  <form (ngSubmit)="send()" [formGroup]="contactForm" novalidate>
     <div class="form-group">
       <label>Name</label>
       <input id="name" type="text" class="form-control" placeholder="First, Last" formControlName="name" [ngClass]="{'is-invalid': nameValidationMessage}" />

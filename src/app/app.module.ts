@@ -12,7 +12,7 @@ import { CustomErrorHandlerService } from './core/custom-error-handler-service.s
   declarations: [
     AppComponent,
     AboutUsComponent,
-    ContactComponent
+    ContactComponent,
   ],
   imports: [
     BrowserModule, 
@@ -25,7 +25,7 @@ import { CustomErrorHandlerService } from './core/custom-error-handler-service.s
     ], {useHash: true})
   ],
   providers: [
-    { provide: ErrorHandler, useClass: CustomErrorHandlerService }//assigns the error handler service to your custom error handler class
+    { provide: ErrorHandler, useClass: CustomErrorHandlerService }
   ],
   bootstrap: [AppComponent]
 })
