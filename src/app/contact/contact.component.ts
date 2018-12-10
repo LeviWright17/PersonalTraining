@@ -44,7 +44,24 @@ export class ContactComponent implements OnInit {
   requiredEmailErrorText: string = 'Must have a valid email.';
   nonRequiredEmailErrorText: string = 'Email address is invalid';
   requiredPhoneErrorText: string = 'Must have a valid phone number';
-  nonRequiredPhoneErrorText: string = 'Phone number is invalid'
+  nonRequiredPhoneErrorText: string = 'Phone number is invalid';
+
+  // private validationMessages = {
+  //   defaultCommunicationPreference: 'phone',
+  //   requiredEmailErrorText: 'Must have a valid email.',
+  //   nonRequiredEmailErrorText: 'Email address is invalid',
+  //   requiredPhoneErrorText: 'Must have a valid phone number',
+  //   nonRequiredPhoneErrorText: 'Phone number is invalid'
+  // }
+
+  // private validationFlags = {
+  //   name: true,
+  //   email: true,
+  //   confirmEmail: true,
+  //   phone: true,
+  //   confirmPhone: true,
+  //   aboutMe: true
+  // }
 
   emailCommunicationPreference: string = 'email';
 
