@@ -44,7 +44,7 @@
                                                             && (contactForm.get('phoneGroup.phone').touched)}" />
       </div>
       <div class="field-error-text" *ngIf="contactForm.get('phoneGroup.phone').touched && !contactForm.get('phoneGroup.phone').valid">
-        <!-- {{phoneError}} -->
+        {{phoneError}}
       </div>
       <div class="form-group">
         <label>Confirm Phone Number</label>
@@ -53,13 +53,7 @@
           !contactForm.get('phoneGroup.confirmPhone').valid 
           && (contactForm.get('phoneGroup.confirmPhone').touched)}" />
       </div>
-<<<<<<< HEAD
-      <div class="field-error-text" *ngIf=" (contactForm.get('phoneGroup.confirmPhone').touched 
-      && !contactForm.get('phoneGroup.confirmPhone').valid) 
-      || contactForm.get('phoneGroup').errors">
-=======
       <div class="field-error-text" *ngIf="contactForm.get('phoneGroup.confirmPhone').touched && contactForm.get('phoneGroup').errors">
->>>>>>> bb3a4d26df3384e45c669a03da1199cf67f6d57b
         Phone is Invalid or does not match
       </div>
     </div>

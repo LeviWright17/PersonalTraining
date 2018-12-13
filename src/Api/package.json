@@ -1,0 +1,13 @@
+{
+    "author": "Shimmerwoof",
+    "name": "api",
+    "version": "0.1.1",
+    "description": "provides a public api for personal training website",
+    "main": "api",
+    "dependencies": {
+        "express": "^4.16.4"
+    },
+    "engines": {
+        "node": "*"
+    }
+}
