@@ -1,7 +1,7 @@
 import { Component, OnInit, Version, VERSION } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { contact } from '../models/contact.model';
-import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl, ValidatorFn, AbstractControlOptions } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { ContactService } from './contact.service';
 import { contactError } from '../models/contactError.model';
@@ -45,23 +45,6 @@ export class ContactComponent implements OnInit {
   nonRequiredEmailErrorText: string = 'Email address is invalid';
   requiredPhoneErrorText: string = 'Must have a valid phone number';
   nonRequiredPhoneErrorText: string = 'Phone number is invalid';
-
-  // private validationMessages = {
-  //   defaultCommunicationPreference: 'phone',
-  //   requiredEmailErrorText: 'Must have a valid email.',
-  //   nonRequiredEmailErrorText: 'Email address is invalid',
-  //   requiredPhoneErrorText: 'Must have a valid phone number',
-  //   nonRequiredPhoneErrorText: 'Phone number is invalid'
-  // }
-
-  // private validationFlags = {
-  //   name: true,
-  //   email: true,
-  //   confirmEmail: true,
-  //   phone: true,
-  //   confirmPhone: true,
-  //   aboutMe: true
-  // }
 
   emailCommunicationPreference: string = 'email';
 
