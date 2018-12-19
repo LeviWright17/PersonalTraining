@@ -6,6 +6,7 @@ import { debounceTime } from 'rxjs/operators';
 import { ContactService } from './contact.service';
 import { contactError } from '../models/contactError.model';
 import { matchEmailFields, matchPhoneFields } from './functions';
+import { renameMe } from '../models/renameMe.model';
 
 @Component({
   selector: 'app-contact',
@@ -110,8 +111,13 @@ export class ContactComponent implements OnInit {
 
   public send() {
     var result;
-    result = this.contactservice.makeAsyncCall().subscribe(
-      data => result = data,
+    // result = this.contactservice.makeAsyncCall().subscribe(
+    //   data => result = data,
+    //   (err: contactError) => console.log(err.friendlyMessage),
+    //   () => console.log('DONE GETTING DATA', result)
+    // )
+    result = this.contactservice.performDataTransformation().subscribe(
+      (data : renameMe) => result = data,
       (err: contactError) => console.log(err.friendlyMessage),
       () => console.log('DONE GETTING DATA', result)
     )
