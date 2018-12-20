@@ -6,6 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { contactError } from '../models/contactError.model';
 import { ContactErrorHandlerService } from './contact-error-handler-service.service';
 import { renameMe } from '../models/renameMe.model';
+import { contact } from '../models/contact.model'; 
 
 @Injectable({
   providedIn: 'root'
@@ -36,18 +37,18 @@ export class ContactService {
     );
   }
 
-  //Note that a post will generally use the same api address. 
-  public writeSomeData(newThingToAdd: renameMe): Observable<renameMe> {
-    return this.http.post<renameMe>('https://reqres.in/api/users', newThingToAdd, { headers: this.headers })
-  }
+  // //Note that a post will generally use the same api address. 
+  // public sendEmail(contact: contact): Observable<contact> {
+  //   return this.http.post<contact>('https://reqres.in/api/users', contact, { headers: this.headers })
+  // }
 
-  //Note that put will traditionally want an id or something appended to the url. Depends on the API. 
-  public updateSomeData(updateSomeData: renameMe): Observable<void> {
-    return this.http.put<void>(`https://reqres.in/api/users/${updateSomeData.id}`, updateSomeData, { headers: this.headers })
-  }
+  // //Note that put will traditionally want an id or something appended to the url. Depends on the API. 
+  // public updateSomeData(updateSomeData: renameMe): Observable<void> {
+  //   return this.http.put<void>(`https://reqres.in/api/users/${updateSomeData.id}`, updateSomeData, { headers: this.headers })
+  // }
 
-  public deleteSomeData(deleteSomeData: renameMe): Observable<void> {
-    return this.http.delete<void>(`https://reqres.in/api/users/${deleteSomeData.id}`); 
-  }
+  // public deleteSomeData(deleteSomeData: renameMe): Observable<void> {
+  //   return this.http.delete<void>(`https://reqres.in/api/users/${deleteSomeData.id}`); 
+  // }
 }
 

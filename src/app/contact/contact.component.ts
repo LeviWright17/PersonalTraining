@@ -111,17 +111,22 @@ export class ContactComponent implements OnInit {
 
   public send() {
     var result;
-    // result = this.contactservice.makeAsyncCall().subscribe(
-    //   data => result = data,
-    //   (err: contactError) => console.log(err.friendlyMessage),
-    //   () => console.log('DONE GETTING DATA', result)
-    // )
-    result = this.contactservice.performDataTransformation().subscribe(
-      (data : renameMe) => result = data,
+    result = this.contactservice.makeAsyncCall().subscribe(
+      data => result = data,
       (err: contactError) => console.log(err.friendlyMessage),
       () => console.log('DONE GETTING DATA', result)
     )
   }
+
+  //Totally works, just may not use it at all in here. Was for learning purposes. 
+  // public doSomeDataTransformation(): any {
+  //   var result; 
+  //   result = this.contactservice.performDataTransformation().subscribe(
+  //     (data : renameMe) => result = data,
+  //     (err: contactError) => console.log(err.friendlyMessage),
+  //     () => console.log('DONE GETTING DATA', result)
+  //   )
+  // }
 
   private setPageTitle() {
     this.titleService.setTitle(`Personal Training' ${VERSION.full}`);
