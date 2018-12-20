@@ -3,10 +3,10 @@ import { ApiService } from '../api.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+// import { ErrorObservable } from 'rxjs/observable/ErrorObservable'; 
 import { contactError } from '../models/contactError.model';
 import { ContactErrorHandlerService } from './contact-error-handler-service.service';
 import { renameMe } from '../models/renameMe.model';
-import { contact } from '../models/contact.model'; 
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +37,7 @@ export class ContactService {
     );
   }
 
+  //NOTE : these are 'working' examples, but they don't actually. 
   // //Note that a post will generally use the same api address. 
   // public sendEmail(contact: contact): Observable<contact> {
   //   return this.http.post<contact>('https://reqres.in/api/users', contact, { headers: this.headers })

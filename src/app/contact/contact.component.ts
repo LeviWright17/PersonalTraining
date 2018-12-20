@@ -119,14 +119,14 @@ export class ContactComponent implements OnInit {
   }
 
   //Totally works, just may not use it at all in here. Was for learning purposes. 
-  // public doSomeDataTransformation(): any {
-  //   var result; 
-  //   result = this.contactservice.performDataTransformation().subscribe(
-  //     (data : renameMe) => result = data,
-  //     (err: contactError) => console.log(err.friendlyMessage),
-  //     () => console.log('DONE GETTING DATA', result)
-  //   )
-  // }
+  public doSomeDataTransformation(): any {
+    var result; 
+    result = this.contactservice.performDataTransformation().subscribe(
+      (data : renameMe) => result = data,
+      (err: contactError) => console.log(err.friendlyMessage),
+      () => console.log('DONE GETTING DATA', result)
+    )
+  }
 
   private setPageTitle() {
     this.titleService.setTitle(`Personal Training' ${VERSION.full}`);
