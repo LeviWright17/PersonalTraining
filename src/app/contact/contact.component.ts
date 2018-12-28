@@ -1,4 +1,4 @@
-import { Component, OnInit, Version, VERSION } from '@angular/core';
+import { Component, OnInit, VERSION } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { contact } from '../models/contact.model';
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
@@ -9,7 +9,7 @@ import { matchEmailFields, matchPhoneFields } from './functions';
 import { renameMe } from '../models/renameMe.model';
 
 @Component({
-  selector: 'app-contact',
+  selector: 'app-contact', //LLL figure out where this is referenced. 
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })
