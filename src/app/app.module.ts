@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomErrorHandlerService } from './core/custom-error-handler-service.service';
 import { PricingComponent } from './pricing/pricing.component';
+import { TrainersComponent } from './trainers/trainers.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { PricingComponent } from './pricing/pricing.component';
     AboutUsComponent,
     ContactComponent,
     PricingComponent,
+    TrainersComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,6 +24,7 @@ import { PricingComponent } from './pricing/pricing.component';
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: 'about-us', component: AboutUsComponent },
+      { path: 'trainers', component: TrainersComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'pricing', component: PricingComponent },
       { path: '', redirectTo: 'about-us', pathMatch: 'full' }
