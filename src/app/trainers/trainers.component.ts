@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrainersComponent implements OnInit {
 
+  private currentSelectedResume : string; 
+
   constructor() { }
 
   ngOnInit() {
