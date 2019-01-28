@@ -45,13 +45,10 @@ export class AppModule { }
 
 //to do list for app : 
 
-  //1. Make the  nav bar static at the top. 
   //Home page : 
     //--> Make sure that those images are not too tall. We want it all to fit right there on the page without scrolling. 
   //Coaches: 
-    //--> Make the resume buttons clickable.
-      //--> Have a modal open and populate with the correct data for each of the trainers. 
-        //--> Perhaps we need a modal component that will dynamically show the content depending on what button was clicked. 
+  //--> Make sure resume content is dynamically displayed based on the button clicked.
   //Contact: 
     //--> Display the data from the form on the send button event. 
     //--> show that you can interact with that api and filter data

@@ -1,3 +1,4 @@
+<div class="container">
 <div class="row">
     <div class="col-sm-6 col-md-6 col-lg-6">
       <div class="thumbnail">
@@ -5,7 +6,7 @@
         <div class="caption">
           <h3>Levi Wright</h3>
           <p>Some awesome text describing what you're good at teaching etc.</p>
-          <p><a href="#" id="leviResume" class="btn btn-primary" role="button">View Full Resume</a></p>
+          <p><a href="#" id="leviResume" class="btn btn-primary" [routerLink]="['/resume']" (click)="toggleResumeContent(true)" role="button">View Full Resume</a></p>
         </div>
       </div>
     </div>
@@ -15,8 +16,10 @@
         <div class="caption">
           <h3>Cece Wright</h3>
           <p>Some awesome text describing what you're good at teaching etc.</p>
-          <p><a id="ceceResume"  class="btn btn-primary" [routerLink]="['/resume']" role="button">View Full Resume</a></p>
+          <p><a id="ceceResume" class="btn btn-primary" [routerLink]="['/resume']" (click)="toggleResumeContent(false)" role="button">View Full Resume</a></p>
         </div>
       </div>
     </div>
   </div>
+  <app-resume hidden='true' [toggleLeviResume]='isLeviResume'> </app-resume>
+</div>

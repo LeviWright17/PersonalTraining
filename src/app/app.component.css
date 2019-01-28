@@ -1,0 +1,9 @@
+.fixed {
+    position: fixed;
+    margin-bottom: 30px; 
+    z-index:99;
+}
+
+.full-width {
+    width: 100%; 
+}

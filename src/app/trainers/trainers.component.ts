@@ -7,11 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrainersComponent implements OnInit {
 
-  private currentSelectedResume : string; 
+  private isLeviResume : boolean; 
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  toggleResumeContent(isLeviResume : boolean){
+    this.isLeviResume = isLeviResume; 
+    console.log(this.isLeviResume, 'levi resume coaches'); 
   }
 
 }
