@@ -5,3 +5,18 @@
 .field-error-border{
     border-color: red;
 }
+
+.page-color-dark {
+    background-color: #0B0C10; 
+}
+
+
+.nav-pill-text-color {
+    color: white;
+}
+
+.button-color {
+    background-color: #2D9CCA; 
+    color: white; 
+}
+

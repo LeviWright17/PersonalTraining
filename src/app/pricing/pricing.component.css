@@ -1,3 +1,30 @@
 .container {
     margin-top: 65px; 
 }
+
+.individual-card {
+    min-height: 30rem; 
+    margin-top: 20px; 
+    color: #25274D; 
+    border-color: #25274D;
+}
+
+.group-card {
+    min-height: 30rem; 
+    margin-top: 20px; 
+    background-color: #2D9CCA;
+     color: white;
+}
+
+.jumbotron-text {
+    color: #25274D; 
+    background-color: white;
+}
+
+.row-margin {
+    margin-top: 20px; 
+}
+
+.individual-card-body {
+    color: #25274D;     
+}
