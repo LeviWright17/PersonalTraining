@@ -11,7 +11,7 @@ export class ResumeComponent implements OnInit {
   private leviResume : string = 'levi'; 
   public resumeContentToDisplay: string;
   public leviResumeContent: string = `
-  <div class="jumbotron">
+  <div class="jumbotron resume-jumbo">
   <div class="container">
     <h2>Levi Wright</h2>
     <ul>
