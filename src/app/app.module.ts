@@ -44,19 +44,7 @@ export class AppModule { }
 
 
 //to do list for app : 
+//Get success behavior around sending a message. 
+//Do some posting and show the data that is being saved from the form. 
+//Add a details page to explain how everything works. 
 
-  //Home page : 
-    //--> Make sure that those images are not too tall. We want it all to fit right there on the page without scrolling. 
-  //Coaches: 
-  //--> Make sure resume content is dynamically displayed based on the button clicked.
-  //Contact: 
-    //--> Display the data from the form on the send button event. 
-    //--> show that you can interact with that api and filter data
-    //--> get and post etc. 
-
-  //Pricing: 
-    //--> Link to paypal. 
-
-  //Overall: 
-    //--> clean up code and make sure styling is decent for a showing. 
-    //--> Take some pictures and get them in there. 
