@@ -32,12 +32,25 @@ export class ResumeComponent implements OnInit {
       4-Time St George Invitational Champion, 6-Time Salt Lake County Futsal League Champion, Winter League Golden Boot Winner 2007</li>
     </ul>
     <p>
-      Soccer was my life's work and greatest accomplishment for the majority of my life. I know what it takes to make it to high profile teams, achieve far more than what is expected of me, and to be a part of a winning team.
-      Although I can help you with any of your soccer needs, I specialize in individual attacking, goal-scoring, defensive aggression, positioning, footskill, and try-out confidence. Let's work together and achieve your goals!
+      Soccer represents one of my greatest passions. I know what it takes to make it to high profile teams, achieve far more than what is expected of me, and to be a part of a winning squad. I have had the privelage of helping my
+      team mates achieve victory, and in several instances, I have been able to experience what it feels like to be the player who made the difference. I also know what it's like to suffer defeat and climb back to the top.
+      I specialize in individual attacking, goal-scoring, defensive aggression, positioning, footskill, and try-out confidence. Let's work together and achieve your goals!
     </p>
   </div>
 </div>`;
-  public ceceResumeContent: string = `<div>Cece resume content</div>`;
+  public ceceResumeContent: string = 
+  `
+  <div class="jumbotron">
+  <div class="container">
+    <h2>Cece Wright</h2>
+    <ul>
+      <li>Stuff about Cece!</li>
+    </ul>
+    <p>
+      Whatever Cece wants to say!
+    </p>
+  </div>
+</div>`;
 
   @Output() displayPhotosEvent: EventEmitter<boolean> = new EventEmitter<boolean>(); 
 

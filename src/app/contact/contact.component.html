@@ -86,7 +86,7 @@
     <div class="field-error-text" *ngIf="contactForm.get('aboutMe').touched && contactForm.get('aboutMe').errors?.required">
       About Me is a required field
     </div>
-    <button class="btn btn-primary btn-lg btn-block save-button" type="submit" id="sendEmailButton" [title]="contactForm.valid ? 'Send us an email' : 'Disabled until all required fields are filled with valid data'"
+    <button class="btn btn-lg btn-block save-button" style="background-color: #2D9CCA; color: white;" type="submit" id="sendEmailButton" [title]="contactForm.valid ? 'Send us an email' : 'Disabled until all required fields are filled with valid data'"
       [disabled]="!contactForm.valid">
       Send</button>
   </form>
