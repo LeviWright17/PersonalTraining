@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { TrainingService } from '../training.service';
 
 @Component({
   selector: 'app-resume',
@@ -7,20 +8,24 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ResumeComponent implements OnInit {
 
-  @Input() toggleLeviResume : boolean;
+  public toggleLeviResume : boolean; 
   public resumeContentToDisplay: string;
   public leviResumeContent: string;
   public ceceResumeContent: string;
 
-  constructor() { }
+  constructor(private trainingService : TrainingService) { 
+
+  }
 
   ngOnInit() {
     this.resumeContentToDisplay = this.toggleLeviResume ? this.leviResumeContent : this.ceceResumeContent;
 
     this.resumeContentToDisplay = `<div>Hey there peeps</div>`
 
-    console.log(this.toggleLeviResume, 'THIS IS THE INPUT PARAM'); 
+    console.log(this.trainingService.resumeFor, 'THIS IS THE INPUT PARAM'); 
   }; 
 
-
+  print(){
+    console.log(this.trainingService.resumeFor, 'AFTER INIT'); 
+  }
 }

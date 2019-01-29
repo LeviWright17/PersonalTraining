@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TrainingService } from './training.service';
 
 @Component({
   selector: 'app-trainers',
@@ -7,16 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrainersComponent implements OnInit {
 
-  private isLeviResume : boolean; 
+  private resumeFor : string = ""; 
 
-  constructor() { }
+  constructor(private trainingService : TrainingService) { }
 
   ngOnInit() {
   }
 
-  toggleResumeContent(isLeviResume : boolean){
-    this.isLeviResume = isLeviResume; 
-    console.log(this.isLeviResume, 'levi resume coaches'); 
-  }
+  toggleResumeContent(resumeFor : string){; 
+    this.trainingService.resumeFor = resumeFor;
+    this.resumeFor = this.trainingService.resumeFor;  
+    console.log(this.resumeFor, 'the resume is for'); 
+  } 
 
 }
