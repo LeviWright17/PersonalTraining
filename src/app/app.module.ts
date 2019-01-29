@@ -47,4 +47,5 @@ export class AppModule { }
 //Get success behavior around sending a message. 
 //Do some posting and show the data that is being saved from the form. 
 //Add a details page to explain how everything works. 
+//add a delay where there are images to load so they don't look wonky.
 

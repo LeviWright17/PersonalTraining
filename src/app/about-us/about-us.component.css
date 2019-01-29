@@ -1,3 +1,36 @@
 .container {
     margin-top: 20px; 
 }
+
+.white-jumbo {
+    background-color: white;
+     opacity: 0.95;
+}
+
+.purple-jumbo {
+    background-color: #25274D;
+     color: white; 
+     opacity: 0.95; 
+     /* width: 60%; */
+}
+
+.light-blue-jumbo {
+    background-color: #2D9CCA; 
+    color: white; 
+    opacity: 0.95; 
+    /* width: 70%;  */
+    /* margin-left: 30%; */
+}
+
+.dark-blue-jumbo {
+    padding-top: 40px;
+    background-color: #29658A; 
+    color: white; 
+    opacity: 0.95; 
+    /* width: 58%;  */
+    /* margin-left: 15%; */
+}
+
+.larger-font  {
+    font-size: 30px; 
+}
