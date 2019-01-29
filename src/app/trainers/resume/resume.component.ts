@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { TrainingService } from '../training.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-resume',
@@ -9,23 +8,23 @@ import { TrainingService } from '../training.service';
 export class ResumeComponent implements OnInit {
 
   @Input() resumeFor : string;
-  public toggleLeviResume : boolean;  
+  private leviResume : string = 'levi'; 
   public resumeContentToDisplay: string;
-  public leviResumeContent: string;
-  public ceceResumeContent: string;
+  public leviResumeContent: string = `<div>Levi resume content</div>`;
+  public ceceResumeContent: string = `<div>Cece resume content</div>`;
 
-  constructor(private trainingService : TrainingService) { 
+  @Output() displayPhotosEvent: EventEmitter<boolean> = new EventEmitter<boolean>(); 
+
+  constructor() { 
 
   }
-  
-  ngOnInit() {
-    this.resumeContentToDisplay = this.toggleLeviResume ? this.leviResumeContent : this.ceceResumeContent;
 
-    this.resumeContentToDisplay = `<div>Hey there peeps</div>`
+  ngOnInit() {
+    this.resumeContentToDisplay = this.resumeFor == this.leviResume ? this.leviResumeContent : this.ceceResumeContent;
   }; 
 
   print(){
-    console.log(this.resumeFor, ':   THIS IS THE RESUME FOR'); 
+    this.displayPhotosEvent.emit(true); 
   }
 }
 

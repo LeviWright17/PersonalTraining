@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TrainingService } from './training.service';
 
 @Component({
   selector: 'app-trainers',
@@ -9,17 +8,22 @@ import { TrainingService } from './training.service';
 export class TrainersComponent implements OnInit {
 
   private resumeFor : string = "some string"; 
-  public isDisplayPhotos : boolean = true; 
+  public isDisplayPhotos : boolean;
 
-  constructor() { }
+  constructor() { 
+
+  }
 
   ngOnInit() {
+    this.isDisplayPhotos = true; 
   }
 
   toggleResumeContent(resumeFor : string){
     this.resumeFor = resumeFor; 
-    console.log(this.resumeFor, 'resume for'); 
     this.isDisplayPhotos = false; 
   } 
 
+  receiveDisplayPhotosMessage($event) {
+    this.isDisplayPhotos = $event;
+  }
 }

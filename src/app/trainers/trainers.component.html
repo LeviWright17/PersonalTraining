@@ -24,6 +24,6 @@
     </div>
   </div>
   <div *ngIf="!isDisplayPhotos">
-    <app-resume [resumeFor]='resumeFor'></app-resume>
+    <app-resume [resumeFor]='resumeFor' (displayPhotosEvent)="receiveDisplayPhotosMessage($event)"></app-resume>
   </div>
 </div>
