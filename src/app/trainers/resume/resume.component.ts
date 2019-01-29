@@ -8,7 +8,8 @@ import { TrainingService } from '../training.service';
 })
 export class ResumeComponent implements OnInit {
 
-  public toggleLeviResume : boolean; 
+  @Input() resumeFor : string;
+  public toggleLeviResume : boolean;  
   public resumeContentToDisplay: string;
   public leviResumeContent: string;
   public ceceResumeContent: string;
@@ -16,16 +17,16 @@ export class ResumeComponent implements OnInit {
   constructor(private trainingService : TrainingService) { 
 
   }
-
+  
   ngOnInit() {
     this.resumeContentToDisplay = this.toggleLeviResume ? this.leviResumeContent : this.ceceResumeContent;
 
     this.resumeContentToDisplay = `<div>Hey there peeps</div>`
-
-    console.log(this.trainingService.resumeFor, 'THIS IS THE INPUT PARAM'); 
   }; 
 
   print(){
-    console.log(this.trainingService.resumeFor, 'AFTER INIT'); 
+    console.log(this.resumeFor, ':   THIS IS THE RESUME FOR'); 
   }
 }
+
+

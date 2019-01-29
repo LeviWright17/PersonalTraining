@@ -8,17 +8,18 @@ import { TrainingService } from './training.service';
 })
 export class TrainersComponent implements OnInit {
 
-  private resumeFor : string = ""; 
+  private resumeFor : string = "some string"; 
+  public isDisplayPhotos : boolean = true; 
 
-  constructor(private trainingService : TrainingService) { }
+  constructor() { }
 
   ngOnInit() {
   }
 
-  toggleResumeContent(resumeFor : string){; 
-    this.trainingService.resumeFor = resumeFor;
-    this.resumeFor = this.trainingService.resumeFor;  
-    console.log(this.resumeFor, 'the resume is for'); 
+  toggleResumeContent(resumeFor : string){
+    this.resumeFor = resumeFor; 
+    console.log(this.resumeFor, 'resume for'); 
+    this.isDisplayPhotos = false; 
   } 
 
 }
