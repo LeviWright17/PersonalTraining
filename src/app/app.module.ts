@@ -34,7 +34,7 @@ import { DescriptionComponent } from './description/description.component';
       { path: 'contact', component: ContactComponent },
       { path: 'pricing', component: PricingComponent },
       { path: 'resume', component: ResumeComponent },
-      { path: 'something', component: DescriptionComponent},
+      { path: 'description', component: DescriptionComponent},
       { path: '', redirectTo: 'about-us', pathMatch: 'full' }
     ], { useHash: true })
   ],
