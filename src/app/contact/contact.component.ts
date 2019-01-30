@@ -80,6 +80,7 @@ export class ContactComponent implements OnInit {
     pattern: ' Phone number can only contain numbers'
   }
 
+
   emailError: string;
   phoneError: string;
 
@@ -99,27 +100,26 @@ export class ContactComponent implements OnInit {
 
   ngOnInit(): void {
     this.setPageTitle();
-    this.runValidation();
-    this.setCommunicationPreference();
-    this.watchNameControl();
-    this.watchEmailGroup();
-    this.watchPhoneGroup(); 
-    this.watchCommunicationPreferenceControlGroup();
+    this.initializeFormValidation();
     this.namecontrol = this.contactForm.get('name'); 
     this.emailControl = this.contactForm.get('emailGroup.email'); 
     this.confirmEmailControl = this.contactForm.get('emailGroup.confirmEmail'); 
     this.phoneControl = this.contactForm.get('phoneGroup.phone'); 
     this.confirmPhoneControl = this.contactForm.get('phoneGroup.confirmPhone'); 
+    this.setCommunicationPreference();
+    this.watchNameControl();
+    this.watchEmailGroup();
+    this.watchPhoneGroup(); 
+    this.watchCommunicationPreferenceControlGroup(); 
   }
 
   public setCommunicationPreference(): void {
-    var selectedCommunicationPreference = this.contactForm.get('communicationPreference').value;
-    if (selectedCommunicationPreference === this.emailCommunicationPreference) {
-      this.configureFieldsForEmailCommunicationPreference();
-    }
-    else {
-      this.configureFieldsForPhoneCommunicationPreference();
-    }
+   var selectedCommunicationPreference = this.contactForm.get('communicationPreference').value; 
+
+   selectedCommunicationPreference === this.emailCommunicationPreference
+    ? this.configureFieldsForEmailCommunicationPreference() 
+    : this.configureFieldsForPhoneCommunicationPreference(); 
+
     this.configureValueAndValidity();
   }
 
@@ -193,14 +193,6 @@ export class ContactComponent implements OnInit {
       this.phoneValidationMessage = Object.keys(c.errors).map(
         key => this.phoneValidationMessage += this.phoneValidationMessages[key]).join(' ');
     }
-
-    var newArray = []; 
-    console.log(this.phoneValidationMessage.split(' '), 'array split');
-    var result = this.phoneValidationMessage.split(' ').forEach(function(value){
-      if(!newArray.includes(value)){
-        newArray.push(value); 
-      }
-    })
   }
 
   private setConfirmPhoneMessage(c: AbstractControl): void {
@@ -223,32 +215,56 @@ export class ContactComponent implements OnInit {
   }
 
   private configureFieldsForPhoneCommunicationPreference() {
+    this.configureValidatorsForPhoneCommunicationPreference();
+    this.resetPhoneInputFieldState(); 
+    this.resetPhoneErrorFieldValues();
+  }
+
+  private configureValidatorsForPhoneCommunicationPreference() {
     this.emailControl.setValidators([Validators.email]);
     this.confirmEmailControl.setValidators([Validators.email]);
     this.phoneControl.setValidators([Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]);
     this.confirmPhoneControl.setValidators([Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]);
-    this.phoneControl.markAsPristine(); 
-    this.phoneControl.markAsUntouched(); 
-    this.confirmPhoneControl.markAsPristine(); 
-    this.confirmPhoneControl.markAsUntouched(); 
+  }
+
+  private resetPhoneInputFieldState() {
+    this.phoneControl.markAsPristine();
+    this.phoneControl.markAsUntouched();
+    this.confirmPhoneControl.markAsPristine();
+    this.confirmPhoneControl.markAsUntouched();
+  }
+
+  private resetPhoneErrorFieldValues() {
     this.emailError = this.nonRequiredEmailErrorText;
     this.phoneError = this.requiredPhoneErrorText;
   }
 
   private configureFieldsForEmailCommunicationPreference() {
-    this.emailControl.setValidators([Validators.required, Validators.email]);
-    this.confirmEmailControl.setValidators([Validators.required, Validators.email]);
-    this.phoneControl.setValidators([Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]);
-    this.confirmPhoneControl.setValidators([Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]);
-    this.emailControl.markAsPristine(); 
-    this.emailControl.markAsUntouched(); 
-    this.confirmEmailControl.markAsPristine(); 
-    this.confirmEmailControl.markAsUntouched(); 
+    this.configureValidatorsForEmailCommunicationPreference();
+    this.resetEmailInputFieldState(); 
+    this.resetEmailErrorFieldValues();
+  }
+
+  private resetEmailErrorFieldValues() {
     this.emailError = this.requiredEmailErrorText;
     this.phoneError = this.nonRequiredPhoneErrorText;
   }
 
-  private runValidation() {
+  private resetEmailInputFieldState() {
+    this.emailControl.markAsPristine();
+    this.emailControl.markAsUntouched();
+    this.confirmEmailControl.markAsPristine();
+    this.confirmEmailControl.markAsUntouched();
+  }
+
+  private configureValidatorsForEmailCommunicationPreference() {
+    this.emailControl.setValidators([Validators.required, Validators.email]);
+    this.confirmEmailControl.setValidators([Validators.required, Validators.email]);
+    this.phoneControl.setValidators([Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]);
+    this.confirmPhoneControl.setValidators([Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]);
+  }
+
+  private initializeFormValidation() {
     this.contactForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       emailGroup: this.formBuilder.group({
@@ -294,6 +310,6 @@ export class ContactComponent implements OnInit {
 
   private watchCommunicationPreferenceControlGroup() {
     const communicationPreferenceGroupControl = this.contactForm.get('communicationPreference'); 
-    communicationPreferenceGroupControl.valueChanges.subscribe(() => this.setCommunicationPreference(this.contactForm.get('communicationPreference').value))
+    communicationPreferenceGroupControl.valueChanges.subscribe(() => this.setCommunicationPreference())
   }
 }
