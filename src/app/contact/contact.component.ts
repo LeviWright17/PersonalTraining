@@ -245,6 +245,10 @@ export class ContactComponent implements OnInit {
     confirmEmailControl.setValidators([Validators.email]);
     phoneControl.setValidators([Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]);
     confirmPhoneControl.setValidators([Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]);
+    phoneControl.markAsPristine(); 
+    phoneControl.markAsUntouched(); 
+    confirmPhoneControl.markAsPristine(); 
+    confirmPhoneControl.markAsUntouched(); 
     this.emailError = this.nonRequiredEmailErrorText;
     this.phoneError = this.requiredPhoneErrorText;
   }
@@ -254,6 +258,10 @@ export class ContactComponent implements OnInit {
     confirmEmailControl.setValidators([Validators.required, Validators.email]);
     phoneControl.setValidators([Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]);
     confirmPhoneControl.setValidators([Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]);
+    emailControl.markAsPristine(); 
+    emailControl.markAsUntouched(); 
+    confirmEmailControl.markAsPristine(); 
+    confirmEmailControl.markAsUntouched(); 
     this.emailError = this.requiredEmailErrorText;
     this.phoneError = this.nonRequiredPhoneErrorText;
   }
