@@ -16,7 +16,6 @@ export function matchEmailFields(control: AbstractControl): { [key: string]: boo
 export function matchPhoneFields(control: AbstractControl): {
   [key: string]: boolean;
 } | null {
-  console.log('this is the control', control)
 
   const startControl = control.get('phone');
   const endControl = control.get('confirmPhone');
@@ -27,6 +26,6 @@ export function matchPhoneFields(control: AbstractControl): {
   if (startControl.value === endControl.value) {
     return null;
   }
-  
+
   return { 'match': true };
 }

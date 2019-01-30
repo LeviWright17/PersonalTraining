@@ -39,7 +39,7 @@ export class ContactComponent implements OnInit {
   nonRequiredPhoneErrorText: string = 'Phone number is invalid';
   emailCommunicationPreference: string = 'email';
 
-  nameValidationMessage: string;
+  nameValidationMessage: string = ''; 
   nameValidationMessages = {
     required: 'Your name is required'
   }
@@ -146,12 +146,13 @@ export class ContactComponent implements OnInit {
     this.titleService.setTitle(`Personal Training' ${VERSION.full}`);
   }
 
-  private setNameMessage(c: AbstractControl): void {
-    this.nameValidationMessage = '';
+  private setValidationMessages(c: AbstractControl, validationObject: object): string {
+    var validationMessage = '';
     if (this.fieldStateIsInvalid(c)) {
-      this.nameValidationMessage = Object.keys(c.errors).map(
-        key => this.nameValidationMessage += this.nameValidationMessages[key]).join(' ');
+      validationMessage = Object.keys(c.errors).map(
+        key => validationMessage += validationObject[key]).join(' ');
     }
+    return validationMessage; 
   }
 
   private setEmailGroupMessage(c: AbstractControl): void {
@@ -287,14 +288,18 @@ export class ContactComponent implements OnInit {
 
   private watchNameControl() {
     const nameControl = this.contactForm.get('name');
-    nameControl.valueChanges.pipe(debounceTime(500)).subscribe(() => this.setNameMessage(nameControl));
+    nameControl.valueChanges.pipe(debounceTime(500)).subscribe(
+      () => this.nameValidationMessage = this.setValidationMessages(nameControl, this.nameValidationMessages));
   }
 
   private watchEmailGroup() {
     const emailGroupControl = this.contactForm.get('emailGroup');
     const emailControl = emailGroupControl.get('email'); 
     const confirmEmailControl = emailGroupControl.get('confirmEmail'); 
-    emailGroupControl.valueChanges.pipe(debounceTime(500)).subscribe(() => this.setEmailGroupMessage(emailGroupControl));
+    
+    emailGroupControl.valueChanges.pipe(debounceTime(500)).subscribe(
+      () => this.emailGroupValidationMessage =  this.setValidationMessages(emailGroupControl, this.emailGroupValidationMessages));
+
     emailControl.valueChanges.pipe(debounceTime(500)).subscribe(() => this.setEmailMessage(emailControl));
     confirmEmailControl.valueChanges.pipe(debounceTime(500)).subscribe(() => this.setConfirmEmailMessage(confirmEmailControl));
   }
