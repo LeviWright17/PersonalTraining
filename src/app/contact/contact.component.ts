@@ -54,21 +54,31 @@ export class ContactComponent implements OnInit {
     required: 'Your name is required'
   }
 
+  emailGroupValidationMessage: string; 
+  emailGroupValidationMessages = {
+    match: 'Email addresses do not match'    
+  }
+
   emailValidationMessage: string;
   emailValidationMessages = {
     required: 'A valid email is required',
     email: 'Email entered is Invalid',
   }
 
-  emailGroupValidationMessage: string; 
-  emailGroupValidationMessages = {
-    match: 'Email addresses do not match'    
+  confirmEmailValidationMessage: string;
+  confirmEmailValidationMessages = {
+    required: 'A valid email is required',
+    email: 'Email entered is Invalid',
+  }
+
+  phoneGroupValidationMessage: string; 
+  phoneGroupValidationMessages = {
+    match: 'Phone numbers do not match'
   }
 
   phoneValidationMessage: string;
   phoneValidationMessages = {
     required: 'A valid phone number is required',
-    match: 'Phone numbers do not match'
   }
 
   emailError: string;
@@ -95,7 +105,7 @@ export class ContactComponent implements OnInit {
     this.setCommunicationPreference(this.contactForm.get('communicationPreference').value);
     this.watchNameControl();
     this.watchEmailGroup();
-
+    this.watchPhoneGroup(); 
   }
 
   public setCommunicationPreference(selectedCommunicationPreference: string): void {
@@ -145,24 +155,44 @@ export class ContactComponent implements OnInit {
     }
   }
 
-
   private setEmailGroupMessage(c: AbstractControl): void {
     this.emailGroupValidationMessage = '';
     if (this.fieldStateIsInvalid(c)) {
-      console.log('current errors', c.errors); 
       this.emailGroupValidationMessage = Object.keys(c.errors).map(
         key => this.emailGroupValidationMessage += this.emailGroupValidationMessages[key]).join(' ');
     }
   }
 
-
   private setEmailMessage(c: AbstractControl): void {
     this.emailValidationMessage = '';
-    console.log(c.errors, 'errors before if block');
     if (this.fieldStateIsInvalid(c)) {
-      console.log('current errors', c.errors); 
       this.emailValidationMessage = Object.keys(c.errors).map(
         key => this.emailValidationMessage += this.emailValidationMessages[key]).join(' ');
+    }
+  }
+
+  
+  private setConfirmEmailMessage(c: AbstractControl): void {
+    this.confirmEmailValidationMessage = '';
+    if (this.fieldStateIsInvalid(c)) {
+      this.confirmEmailValidationMessage = Object.keys(c.errors).map(
+        key => this.confirmEmailValidationMessage += this.confirmEmailValidationMessages[key]).join(' ');
+    }
+  }
+
+  private setPhoneGroupMessage(c: AbstractControl): void {
+    this.phoneGroupValidationMessage = '';
+    if (this.fieldStateIsInvalid(c)) {
+      this.phoneGroupValidationMessage = Object.keys(c.errors).map(
+        key => this.phoneGroupValidationMessage += this.phoneGroupValidationMessages[key]).join(' ');
+    }
+  }
+  
+  private setPhoneMessage(c: AbstractControl): void {
+    this.phoneValidationMessage = '';
+    if (this.fieldStateIsInvalid(c)) {
+      this.phoneValidationMessage = Object.keys(c.errors).map(
+        key => this.phoneValidationMessage += this.phoneValidationMessages[key]).join(' ');
     }
   }
 
@@ -222,7 +252,16 @@ export class ContactComponent implements OnInit {
   private watchEmailGroup() {
     const emailGroupControl = this.contactForm.get('emailGroup');
     const emailControl = emailGroupControl.get('email'); 
-    emailGroupControl.valueChanges.subscribe(() => this.setEmailGroupMessage(emailGroupControl));
-    emailControl.valueChanges.subscribe(() => this.setEmailMessage(emailControl));
+    const confirmEmailControl = emailGroupControl.get('confirmEmail'); 
+    emailGroupControl.valueChanges.pipe(debounceTime(500)).subscribe(() => this.setEmailGroupMessage(emailGroupControl));
+    emailControl.valueChanges.pipe(debounceTime(500)).subscribe(() => this.setEmailMessage(emailControl));
+    confirmEmailControl.valueChanges.pipe(debounceTime(500)).subscribe(() => this.setConfirmEmailMessage(confirmEmailControl));
+  }
+
+  private watchPhoneGroup() {
+    const phoneGroupControl = this.contactForm.get('phoneGroup'); 
+    const phoneControl = phoneGroupControl.get('phone'); 
+    phoneGroupControl.valueChanges.pipe(debounceTime(500)).subscribe(()=> this.setPhoneGroupMessage(phoneGroupControl)); 
+    phoneControl.valueChanges.pipe(debounceTime(500)).subscribe(()=> this.setPhoneMessage(phoneControl)); 
   }
 }

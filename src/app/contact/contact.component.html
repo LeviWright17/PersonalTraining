@@ -29,27 +29,26 @@
       <span id="emailGroupError" class="field-error-text">
         {{emailGroupValidationMessage}}
       </span>
+      <div id="emailGroupError" class="field-error-text">
+        {{confirmEmailValidationMessage}}
+      </div>
     </div>
     <div formGroupName="phoneGroup">
       <div class="form-group">
         <label>Phone Number</label>
         <input id="phone" type="text" class="form-control" maxlength="10" placeholder="(123) 123 - 1234"
-          formControlName="phone" [ngClass]="{'is-invalid': contactForm.get('phoneGroup').errors ||
-                                                            !contactForm.get('phoneGroup.phone').valid 
-                                                            && (contactForm.get('phoneGroup.phone').touched)}" />
+          formControlName="phone" [ngClass]="{'is-invalid': phoneValidationMessage }" />
       </div>
-      <div class="field-error-text" *ngIf="contactForm.get('phoneGroup.phone').touched && !contactForm.get('phoneGroup.phone').valid">
-        {{phoneError}}
+      <div id="phoneError" class="field-error-text">
+        {{phoneValidationMessage}}
       </div>
       <div class="form-group">
         <label>Confirm Phone Number</label>
         <input id="phone" type="text" class="form-control" maxlength="10" placeholder="(123) 123 - 1234"
-          formControlName="confirmPhone" [ngClass]="{'is-invalid':  contactForm.get('phoneGroup').errors ||
-          !contactForm.get('phoneGroup.confirmPhone').valid 
-          && (contactForm.get('phoneGroup.confirmPhone').touched)}" />
+          formControlName="confirmPhone" [ngClass]="{'is-invalid': phoneGroupValidationMessage }" />
       </div>
-      <div class="field-error-text" *ngIf="contactForm.get('phoneGroup.confirmPhone').touched && contactForm.get('phoneGroup').errors">
-        Phone is Invalid or does not match
+      <div id="phoneGroupError" class="field-error-text">
+        {{phoneGroupValidationMessage}}
       </div>
     </div>
     <label>My Communication Preference:</label>
