@@ -24,14 +24,10 @@
       <div class="form-group">
         <label>Confirm Email Address</label>
         <input id="confirmEmail" type="text" class="form-control" placeholder="example@website.com" formControlName="confirmEmail"
-          [ngClass]="{'is-invalid': contactForm.get('emailGroup').errors ||
-                                                !contactForm.get('emailGroup.confirmEmail').valid 
-                                                && (contactForm.get('emailGroup.confirmEmail').touched)}" />
+          [ngClass]="{'is-invalid': emailGroupValidationMessage }" />
       </div>
-      <span id="emailError" class="field-error-text" *ngIf="(contactForm.get('emailGroup.confirmEmail').touched 
-                                                            && !contactForm.get('emailGroup.confirmEmail').valid) 
-                                                            || contactForm.get('emailGroup').errors ">
-        Email is invalid or does not match
+      <span id="emailGroupError" class="field-error-text">
+        {{emailGroupValidationMessage}}
       </span>
     </div>
     <div formGroupName="phoneGroup">

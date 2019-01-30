@@ -58,7 +58,11 @@ export class ContactComponent implements OnInit {
   emailValidationMessages = {
     required: 'A valid email is required',
     email: 'Email entered is Invalid',
-    match: 'Email addresses do not match'
+  }
+
+  emailGroupValidationMessage: string; 
+  emailGroupValidationMessages = {
+    match: 'Email addresses do not match'    
   }
 
   phoneValidationMessage: string;
@@ -90,7 +94,8 @@ export class ContactComponent implements OnInit {
     this.confirmEmailControl = this.contactForm.get('emailGroup.confirmEmail'); 
     this.setCommunicationPreference(this.contactForm.get('communicationPreference').value);
     this.watchNameControl();
-    this.watchEmailControl();
+    this.watchEmailGroup();
+
   }
 
   public setCommunicationPreference(selectedCommunicationPreference: string): void {
@@ -140,9 +145,22 @@ export class ContactComponent implements OnInit {
     }
   }
 
+
+  private setEmailGroupMessage(c: AbstractControl): void {
+    this.emailGroupValidationMessage = '';
+    if (this.fieldStateIsInvalid(c)) {
+      console.log('current errors', c.errors); 
+      this.emailGroupValidationMessage = Object.keys(c.errors).map(
+        key => this.emailGroupValidationMessage += this.emailGroupValidationMessages[key]).join(' ');
+    }
+  }
+
+
   private setEmailMessage(c: AbstractControl): void {
     this.emailValidationMessage = '';
+    console.log(c.errors, 'errors before if block');
     if (this.fieldStateIsInvalid(c)) {
+      console.log('current errors', c.errors); 
       this.emailValidationMessage = Object.keys(c.errors).map(
         key => this.emailValidationMessage += this.emailValidationMessages[key]).join(' ');
     }
@@ -179,8 +197,8 @@ export class ContactComponent implements OnInit {
     this.contactForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       emailGroup: this.formBuilder.group({
-        email: ['', [Validators.email]],
-        confirmEmail: ['', [Validators.email]]
+        email: ['', Validators.email],
+        confirmEmail: ['', Validators.email]
       }, {
           validator: matchEmailFields
         }),
@@ -201,8 +219,10 @@ export class ContactComponent implements OnInit {
     nameControl.valueChanges.pipe(debounceTime(500)).subscribe(value => this.setNameMessage(nameControl));
   }
 
-  private watchEmailControl() {
-    const emailControl = this.contactForm.get('emailGroup.email');
-    emailControl.valueChanges.pipe(debounceTime(1000)).subscribe(value => this.setEmailMessage(emailControl));
+  private watchEmailGroup() {
+    const emailGroupControl = this.contactForm.get('emailGroup');
+    const emailControl = emailGroupControl.get('email'); 
+    emailGroupControl.valueChanges.subscribe(() => this.setEmailGroupMessage(emailGroupControl));
+    emailControl.valueChanges.subscribe(() => this.setEmailMessage(emailControl));
   }
 }
