@@ -11,7 +11,6 @@ import { PricingComponent } from './pricing/pricing.component';
 import { TrainersComponent } from './trainers/trainers.component';
 import { ResumeComponent } from './trainers/resume/resume.component'; 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DescriptionComponent } from './description/description.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,6 @@ import { DescriptionComponent } from './description/description.component';
     PricingComponent,
     TrainersComponent,
     ResumeComponent,
-    DescriptionComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +32,6 @@ import { DescriptionComponent } from './description/description.component';
       { path: 'contact', component: ContactComponent },
       { path: 'pricing', component: PricingComponent },
       { path: 'resume', component: ResumeComponent },
-      { path: 'description', component: DescriptionComponent},
       { path: '', redirectTo: 'about-us', pathMatch: 'full' }
     ], { useHash: true })
   ],
