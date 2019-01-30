@@ -45,10 +45,13 @@
       <div class="form-group">
         <label>Confirm Phone Number</label>
         <input id="phone" type="text" class="form-control" maxlength="10" placeholder="(123) 123 - 1234"
-          formControlName="confirmPhone" [ngClass]="{'is-invalid': phoneGroupValidationMessage }" />
+          formControlName="confirmPhone" [ngClass]="{'is-invalid': phoneGroupValidationMessage }" [ngClass]="{'is-invalid': confirmPhoneValidationMessage }"  />
       </div>
       <div id="phoneGroupError" class="field-error-text">
         {{phoneGroupValidationMessage}}
+      </div>
+      <div id="confirmPhoneError" class="field-error-text">
+        {{confirmPhoneValidationMessage}}
       </div>
     </div>
     <label>My Communication Preference:</label>
