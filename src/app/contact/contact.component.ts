@@ -9,7 +9,7 @@ import { matchEmailFields, matchPhoneFields } from './functions';
 import { renameMe } from '../models/renameMe.model';
 
 @Component({
-  selector: 'app-contact', //LLL figure out where this is referenced. 
+  selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })
@@ -94,6 +94,8 @@ export class ContactComponent implements OnInit {
   phoneControl: AbstractControl = new FormControl();
   confirmPhoneControl: AbstractControl = new FormControl();
 
+  standardDebounceTime : number = 500; 
+
   constructor(private formBuilder: FormBuilder, private contactservice: ContactService,
     private titleService: Title) {
     this.contactModel.primaryInterest = '';
@@ -136,7 +138,6 @@ export class ContactComponent implements OnInit {
     )
   }
 
-  //Totally works, just may not use it at all in here. Was for learning purposes. 
   public doSomeDataTransformation(): any {
     var result;
     result = this.contactservice.performDataTransformation().subscribe(
@@ -243,7 +244,7 @@ export class ContactComponent implements OnInit {
 
   private watchNameControl() {
     const nameControl = this.contactForm.get('name');
-    nameControl.valueChanges.pipe(debounceTime(500)).subscribe(
+    nameControl.valueChanges.pipe(debounceTime(this.standardDebounceTime)).subscribe(
       () => this.nameValidationMessage = this.setValidationMessages(nameControl, this.nameValidationMessages));
   }
 
@@ -254,17 +255,17 @@ export class ContactComponent implements OnInit {
   }
 
   private watchConfirmEmailControl() {
-    this.confirmEmailControl.valueChanges.pipe(debounceTime(500)).subscribe(
+    this.confirmEmailControl.valueChanges.pipe(debounceTime(this.standardDebounceTime)).subscribe(
       () => this.confirmEmailValidationMessage = this.setValidationMessages(this.confirmEmailControl, this.confirmEmailValidationMessages));
   }
 
   private watchEmailControl() {
-    this.emailControl.valueChanges.pipe(debounceTime(500)).subscribe(
+    this.emailControl.valueChanges.pipe(debounceTime(this.standardDebounceTime)).subscribe(
       () => this.emailValidationMessage = this.setValidationMessages(this.emailControl, this.emailValidationMessages));
   }
 
   private watchEmailGroupControl() {
-    this.emailGroupControl.valueChanges.pipe(debounceTime(500)).subscribe(
+    this.emailGroupControl.valueChanges.pipe(debounceTime(this.standardDebounceTime)).subscribe(
       () => this.emailGroupValidationMessage = this.setValidationMessages(this.emailGroupControl, this.emailGroupValidationMessages));
   }
 
@@ -275,19 +276,18 @@ export class ContactComponent implements OnInit {
   }
 
   private watchConfirmPhoneControl() {
-    this.confirmPhoneControl.valueChanges.pipe(debounceTime(500)).subscribe(
+    this.confirmPhoneControl.valueChanges.pipe(debounceTime(this.standardDebounceTime)).subscribe(
       () => this.confirmPhoneValidationMessage = this.setValidationMessages(this.confirmPhoneControl, this.confirmPhoneValidationMessages));
   }
 
   private watchPhoneControl() {
-    this.phoneControl.valueChanges.pipe(debounceTime(500)).subscribe(
+    this.phoneControl.valueChanges.pipe(debounceTime(this.standardDebounceTime)).subscribe(
       () => this.phoneValidationMessage = this.setValidationMessages(this.phoneControl, this.phoneValidationMessages));
   }
 
   private watchPhoneGroupControl() {
-    this.phoneGroupControl.valueChanges.pipe(debounceTime(500)).subscribe(
+    this.phoneGroupControl.valueChanges.pipe(debounceTime(this.standardDebounceTime)).subscribe(
       () => this.phoneGroupValidationMessage = this.setValidationMessages(this.phoneGroupControl, this.phoneGroupValidationMessages));
-      console.log("I am being called"); 
   }
 
   private watchCommunicationPreferenceControlGroup() {
