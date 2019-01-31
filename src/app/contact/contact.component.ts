@@ -131,10 +131,11 @@ export class ContactComponent implements OnInit {
 
   public send() {
     var result;
+    console.log(this.contactForm.value,'HERE IS THE CONTACT FORM DATA'); 
     result = this.contactservice.makeAsyncCall().subscribe(
       data => result = data,
       (err: contactError) => console.log(err.friendlyMessage),
-      () => console.log('DONE GETTING DATA', result)
+      () => console.log(result, 'DONE GETTING DATA FROM API')
     )
   }
 
@@ -143,7 +144,7 @@ export class ContactComponent implements OnInit {
     result = this.contactservice.performDataTransformation().subscribe(
       (data: renameMe) => result = data,
       (err: contactError) => console.log(err.friendlyMessage),
-      () => console.log('DONE GETTING DATA', result)
+      () => console.log(result, 'DONE PERFORMING DATA TRANSFORM')
     )
   }
 

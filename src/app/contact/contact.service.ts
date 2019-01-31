@@ -20,7 +20,7 @@ export class ContactService {
   });
 
   public makeAsyncCall(): Observable<any | contactError> {
-    console.log('making async call');
+    console.log('MAKING ASYNC CALL TO API');
     return this.http.get<any>(`https://reqres.in/api/users`, { headers: this.headers }).pipe(
       catchError(this.errorHandler.customErrorHandle)
     );
