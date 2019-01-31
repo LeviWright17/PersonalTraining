@@ -1,5 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { ToastrModule } from 'ngx-toastr'; 
+
 import { AppComponent } from './app.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactComponent } from './contact/contact.component';
@@ -10,7 +14,6 @@ import { CustomErrorHandlerService } from './core/custom-error-handler-service.s
 import { PricingComponent } from './pricing/pricing.component';
 import { TrainersComponent } from './trainers/trainers.component';
 import { ResumeComponent } from './trainers/resume/resume.component'; 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
+    BrowserAnimationsModule, 
+    ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: 'about-us', component: AboutUsComponent },
       { path: 'trainers', component: TrainersComponent },

@@ -7,6 +7,7 @@ import { ContactService } from './contact.service';
 import { contactError } from '../models/contactError.model';
 import { matchEmailFields, matchPhoneFields } from './functions';
 import { renameMe } from '../models/renameMe.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-contact',
@@ -97,7 +98,7 @@ export class ContactComponent implements OnInit {
   standardDebounceTime : number = 500; 
 
   constructor(private formBuilder: FormBuilder, private contactservice: ContactService,
-    private titleService: Title) {
+    private titleService: Title, private toastr: ToastrService) {
     this.contactModel.primaryInterest = '';
     this.contactModel.communicationPreference = '';
   }
@@ -135,8 +136,15 @@ export class ContactComponent implements OnInit {
     result = this.contactservice.makeAsyncCall().subscribe(
       data => result = data,
       (err: contactError) => console.log(err.friendlyMessage),
-      () => console.log(result, 'DONE GETTING DATA FROM API')
+      () => console.log(result, 'DONE GETTING DATA FROM API'), 
     )
+    this.showToastrSuccess(); 
+  }
+
+  private showToastrSuccess() {
+    this.toastr.toastrConfig.autoDismiss = true;
+    this.toastr.toastrConfig.closeButton = true;
+    this.toastr.success('Message has been sent!', 'Success!');
   }
 
   public doSomeDataTransformation(): any {
