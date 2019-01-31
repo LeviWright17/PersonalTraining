@@ -138,8 +138,14 @@ export class ContactComponent implements OnInit {
       (err: contactError) => console.log(err.friendlyMessage),
       () => console.log(result, 'DONE GETTING DATA FROM API'), 
     )
+    this.clearFormFields(); 
     this.showToastrSuccess(); 
   }
+
+  private clearFormFields(){
+    this.contactForm.reset(); 
+  }
+
 
   private showToastrSuccess() {
     this.toastr.toastrConfig.autoDismiss = true;
