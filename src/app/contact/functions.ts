@@ -4,6 +4,10 @@ export function matchEmailFields(control: AbstractControl): { [key: string]: boo
   const startControl = control.get('email');
   const endControl = control.get('confirmEmail');
 
+  if(startControl.pristine && endControl.pristine){
+    return null; 
+  }
+
   if (startControl.value === endControl.value) {
     return null
   }
@@ -16,6 +20,10 @@ export function matchPhoneFields(control: AbstractControl): {
 
   const startControl = control.get('phone');
   const endControl = control.get('confirmPhone');
+
+  if(startControl.pristine && endControl.pristine){
+    return null; 
+  }
 
   if (startControl.value === endControl.value) {
     return null;
